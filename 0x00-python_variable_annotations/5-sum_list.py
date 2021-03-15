@@ -4,6 +4,8 @@
 
 
 from typing import List
+
+
 def sum_list(input_list: List[float]) -> float:
     """[summary]
 
@@ -13,7 +15,7 @@ def sum_list(input_list: List[float]) -> float:
     Returns:
         float: [description]
     """
-    s: int = 0
+    s = 0
 
     for i in input_list:
         s += i
