@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""[summary]
-"""
+""" a type-annotated function add """
 
 
 def add (a: int, b: float) -> float:
@@ -13,7 +12,5 @@ def add (a: int, b: float) -> float:
     Returns:
         [float]: [result of the addition]
     """
-
-    
     return a + b
 
