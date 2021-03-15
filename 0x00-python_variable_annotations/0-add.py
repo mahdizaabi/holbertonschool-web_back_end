@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
-""" a type-annotated function add """
+"""[summary]
+"""
 
 
-def add(a: float, b: float) -> float:
+def add (a: int, b: float) -> float:
+    """[type-annotated add function]
+
+    Args:
+        a ([int]): [dessscription]
+        b ([float]): [dsescription]
+
+    Returns:
+        [float]: [result of the addition]
     """
-    a type-annotated function add that
-    takes a float a and a float b as arguments
-    and returns their sum as a float
-    """
+
+    
     return a + b
+
