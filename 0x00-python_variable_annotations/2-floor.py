@@ -6,13 +6,13 @@
 import math
 
 
-def floor(n: float) -> float:
+def floor(n: float) -> int:
     """[summary]
 
     Args:
         n (float): [description]
 
     Returns:
-        float: [description]
+        int: [description]
     """
     return math.floor(n)
