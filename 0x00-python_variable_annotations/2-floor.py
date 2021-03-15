@@ -2,11 +2,11 @@
 """Basic annotations - floor
 """
 
+
 import math
 
 
-
-def floor(n:float) -> float:
+def floor(n: float) -> float:
     """[summary]
 
     Args:
@@ -16,4 +16,3 @@ def floor(n:float) -> float:
         float: [description]
     """
     return math.floor(n)
-
