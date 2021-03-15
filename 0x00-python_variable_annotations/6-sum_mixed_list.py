@@ -6,14 +6,14 @@
 from typing import List, Union
 
 
-def sum_mixed_list(mxd_lst: List[Union[int, str]]) -> List[float]:
+def sum_mixed_list(mxd_lst: List[Union[int, float]]) -> float:
     """[summary]
 
     Args:
-        mxd_lst (List): [List of integers and floats ]
+        mxd_lst (List): List of integers and floats 
 
     Returns:
-        List[float]: [Sum of the list]
+        float: Sum of the list
     """
     s: float = float(0)
     for i in mxd_lst:
