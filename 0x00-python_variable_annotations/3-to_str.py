@@ -13,4 +13,3 @@ def to_str(n: float) -> str:
         str: [string representation of the float]
     """
     return repr(n)
-
