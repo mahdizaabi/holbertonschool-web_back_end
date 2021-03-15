@@ -2,7 +2,7 @@
 """ a type-annotated function add """
 
 
-def add (a: int, b: float) -> float:
+def add (a: float, b: float) -> float:
     """[type-annotated add function]
 
     Args:
