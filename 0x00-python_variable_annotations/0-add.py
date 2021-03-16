@@ -13,3 +13,6 @@ def add(a: float, b: float) -> float:
         [float]: [result of the addition]
     """
     return a + b
+def fd():
+    return a + b
+    /* dsdsds */
