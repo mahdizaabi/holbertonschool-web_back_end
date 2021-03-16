@@ -1,23 +1,18 @@
 #!/usr/bin/env python3
-"""The basic of async
-"""
-
-import random
-import time
+""" asynchronous coroutine """
 import asyncio
+import random
 
 
-async def wait_random(max_delay=10):
+async def wait_random(max_delay: int = 10) -> float:
     """[summary]
 
     Args:
         max_delay (int, optional): [description]. Defaults to 10.
 
     Returns:
-        [type]: [description]
+        float: [description]
     """
-    secure_random = random.SystemRandom()
-
-    delay = secure_random.uniform(0, max_delay)
+    delay = random.uniform(0, max_delay)
     await asyncio.sleep(delay)
     return delay
