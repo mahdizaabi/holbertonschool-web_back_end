@@ -8,8 +8,9 @@ async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 async def measure_runtime() -> float:
     """
-    measure the run time of 4 concurrent stream data, with a delay of 10 seconds
-    for each data Stream ... data is collected using async comprehension 
+    measure the run time of 4 concurrent stream data,
+    with a delay of 10 seconds for each data Stream.
+    data is collected using async comprehension .
     """
     t0 = time.time()
     tasks = [async_comprehension() for i in range(4)]
