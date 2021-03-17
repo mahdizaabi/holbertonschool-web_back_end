@@ -7,7 +7,7 @@ import asyncio
 from typing import Generator
 
 
-async def async_generator() -> Generator[float]:
+async def async_generator() -> Generator[float, None, None]:
     """[summary]
 
     Yields:
