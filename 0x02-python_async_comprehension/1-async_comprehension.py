@@ -3,12 +3,12 @@
 
 
 import asyncio
-from typing import Generator
+from typing import List
 
 async_generator = __import__('0-async_generator').async_generator
 
 
-async def async_comprehension() -> list[float]:
+async def async_comprehension() -> List[float]:
     """[summary]
 
     Returns:
