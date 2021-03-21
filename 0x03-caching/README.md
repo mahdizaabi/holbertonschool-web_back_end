@@ -21,3 +21,9 @@ F F F F * F * F
 * Page hit .
 ==> drawbacks: overhead: we need to keep track of pages(when they have been added)
 ==> Difficult to implement
+
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
