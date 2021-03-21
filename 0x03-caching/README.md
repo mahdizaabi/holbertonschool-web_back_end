@@ -11,19 +11,16 @@ Least Recently Used(LRU) algorithm:
 
 
 least recently used
-<--------------
-7 0 1 2 0 3 0 4
----------------
-7|7|7|2|2|2|2|4|
- |0|0|0|0|0|0|0|
- | |1|1|1|3|3|3|
+
+| 7 	| 0 	| 1 	| 2 	| 0 	| 3 	| 0 	| 4 	|
+|---	|---	|---	|---	|---	|---	|---	|---	|
+| 7 	| 7 	| 7 	| 2 	| 2 	| 2 	| 2 	| 4 	|
+|   	| 0 	| 0 	| 0 	| 0 	| 0 	| 0 	| 0 	|
+|   	|   	| 1 	| 1 	| 1 	| 3 	| 3 	| 3 	|
+
+
+
 F F F F * F * F
 * Page hit .
 ==> drawbacks: overhead: we need to keep track of pages(when they have been added)
 ==> Difficult to implement
-
-|   |   |   |   |   |
-|---|---|---|---|---|
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
