@@ -1,4 +1,14 @@
-dict = {"b":12, "a": 25, "c":85}
+class increment():
+    i = 10
+    def incrmentx(self):
 
-print(sorted(dict)[0])
+        self.__class__.i = self.__class__.i +1
 
+a = increment()
+print(a.i)
+
+
+a.incrmentx()
+
+print(a.i)
+print(increment.i)
