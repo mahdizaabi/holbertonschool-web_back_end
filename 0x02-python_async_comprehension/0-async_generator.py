@@ -9,9 +9,9 @@ from typing import Generator
 
 async def async_generator() -> Generator[float, None, None]:
     """[summary]
-
+    async function generator 
     Yields:
-        [type]: [description]
+        [Generator]: [iterable object of floats]
     """
     for _ in range(10):
         x = random.uniform(0, 10)
