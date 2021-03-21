@@ -13,7 +13,7 @@ class FIFOCache(BaseCaching):
         super().__init__()
 
     def put(self, key, item):
-        """ assign to the dictionary self.cache_data 
+        """ assign to the dictionary self.cache_data
         the item value for the key key."""
 
         if key not in self.cache_data.keys():
