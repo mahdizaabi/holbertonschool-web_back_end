@@ -10,7 +10,8 @@ Least Recently Used(LRU) algorithm:
 3. if the requested page is already present on the page frame, that's a hit .(We do nothing)
 
 
-least recently used
+least recently used  
+<-------------------  
 
 | 7 	| 0 	| 1 	| 2 	| 0 	| 3 	| 0 	| 4 	|
 |---	|---	|---	|---	|---	|---	|---	|---	|
