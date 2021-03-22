@@ -28,7 +28,8 @@ class MRUCache (BaseCaching):
                 self.cache_data[key] = item
                 self.reloadQueue(key, key)
             else:
-                print("DISCARD: {}".format(self.__class__.Queue[0]))
+                print("DISCARD: {}".format(self.__class__.Queue[len(
+                    self.__class__.Queue) - 1]))
 
                 keyToDelete = self.__class__.Queue[len(
                     self.__class__.Queue) - 1]
