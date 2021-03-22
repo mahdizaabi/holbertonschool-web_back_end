@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 4-mru_cache.py """
+""" 100-lfu_cache.py """
 
 
 BaseCaching = __import__('base_caching').BaseCaching
@@ -53,7 +53,6 @@ class LFUCache(BaseCaching):
                     self.cache_data[key] = item
                     self.__class__.Queue.append(key)
 
-                    
         else:
 
             self.cache_data[key] = item
