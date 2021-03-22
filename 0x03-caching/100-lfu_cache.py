@@ -61,7 +61,6 @@ class LFUCache(BaseCaching):
 
     def get(self, key):
         """Request an item from the cache """
-        print(self.__class__.mostUsed)
         if key is None or key not in self.cache_data.keys():
             return None
         # if key not in self.__class__.Queue:
