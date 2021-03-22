@@ -5,7 +5,7 @@
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class LFUCache  (BaseCaching):
+class LFUCache(BaseCaching):
     """MRUCache class """
     Queue = []
     mostUsed = {}
@@ -50,6 +50,10 @@ class LFUCache  (BaseCaching):
                     print("DISCARD: {}".format(keyx))
                     del self.cache_data[keyx]
                     self.__class__.mostUsed.pop(keyx, None)
+                    self.cache_data[key] = item
+                    self.__class__.Queue.append(key)
+
+                    
         else:
 
             self.cache_data[key] = item
@@ -57,6 +61,7 @@ class LFUCache  (BaseCaching):
 
     def get(self, key):
         """Request an item from the cache """
+        print(self.__class__.mostUsed)
         if key is None or key not in self.cache_data.keys():
             return None
         # if key not in self.__class__.Queue:
