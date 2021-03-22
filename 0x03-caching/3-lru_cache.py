@@ -6,6 +6,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LRUCache (BaseCaching):
+    """LRUCache class """
     Queue = []
 
     def __init__(self):
