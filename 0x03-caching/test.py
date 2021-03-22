@@ -1,5 +1,5 @@
-listx = [1, 5, 2, 8]
+data = {'a':1, 'aa':5, 'c':2, 'e':8}
 
 
-listx.remove(5)
-print(listx)
+
+print(sorted(data, key=data.get))
