@@ -1,14 +1,5 @@
-class increment():
-    i = 10
-    def incrmentx(self):
-
-        self.__class__.i = self.__class__.i +1
-
-a = increment()
-print(a.i)
+listx = [1, 5, 2, 8]
 
 
-a.incrmentx()
-
-print(a.i)
-print(increment.i)
+listx.remove(5)
+print(listx)
