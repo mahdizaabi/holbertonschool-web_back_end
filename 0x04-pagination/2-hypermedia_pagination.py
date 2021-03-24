@@ -29,7 +29,7 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def get_page(self, page: int = 1, page_size: int = 10) -> Dict:
         """ Paginate the Dataset and return the appropriate page
             of the dataset
         """
