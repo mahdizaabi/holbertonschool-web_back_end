@@ -28,7 +28,6 @@ class Server:
 
         return self.__dataset
 
-
     def indexed_dataset(self) -> Dict[int, List]:
         """Dataset indexed by sorting position, starting at 0
         """
@@ -41,7 +40,7 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        """ hypermedia_del_pagination     
+        """ hypermedia_del_pagination
         """
         assert isinstance(index, int) and isinstance(page_size, int)
         assert len(self.indexed_dataset()) > index >= 0
