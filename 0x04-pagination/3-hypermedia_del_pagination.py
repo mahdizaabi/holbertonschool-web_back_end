@@ -5,7 +5,7 @@
 
 import csv
 import math
-from typing import List
+from typing import List, Dict
 
 
 class Server:
@@ -39,17 +39,17 @@ class Server:
             }
         return self.__indexed_dataset
 
-     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        """ Deletion-resilient hypermedia pagination        
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
+        """ hypermedia_del_pagination     
         """
         assert isinstance(index, int) and isinstance(page_size, int)
         assert len(self.indexed_dataset()) > index >= 0
-        last_index = index + page_size
+        next_index = index + page_size
         DataSet = []
-        for item in range(index,index + page_size):
+        for item in range(index, index + page_size):
             if not self.indexed_dataset().get(item):
                 item += 1
-                last_index += 1
+                next_index += 1
             DataSet.append(self.indexed_dataset()[item])
         return {
             'index': index,
