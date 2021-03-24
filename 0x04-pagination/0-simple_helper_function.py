@@ -5,8 +5,8 @@ Main file
 
 
 def index_range(page, page_size):
-    """return list parameters for pagination"""
+    """return the index range of the data List to pgainate"""
 
-    previousPagesContent = (page - 1) * page_size
+    currentListIndex = (page - 1) * page_size
 
-    return(previousPagesContent, previousPagesContent + page_size)
+    return(currentListIndex, currentListIndex + page_size)
