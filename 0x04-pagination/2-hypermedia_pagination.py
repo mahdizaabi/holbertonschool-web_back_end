@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-1-simple_pagination.py
+2-hypermedia_pagination.py
 """
 
 import csv
@@ -54,7 +54,7 @@ class Server:
         max_pages = math.ceil(len(DataSet) / page_size)
 
         return ({
-            'page_size': page_size,
+            'page_size': page_size if max_pages >= page else 0,
             'page': page,
             'data': self.get_page(page, page_size),
             'next_page': page + 1 if max_pages >= page + 1 else None,
