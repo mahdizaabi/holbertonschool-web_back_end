@@ -58,6 +58,6 @@ class Server:
             'page': page,
             'data': self.get_page(page, page_size),
             'next_page': page + 1 if max_pages >= page + 1 else None,
-            'prev_page': page - 1,
+            'prev_page': page - 1 if page > 1 else None,
             'total_pages': max_pages
         })
