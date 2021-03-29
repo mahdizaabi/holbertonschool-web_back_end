@@ -4,6 +4,7 @@ Module for filtered_logger
 0x05-personal_data
 Holberton Web Stack programming Spec ― Back-end
 """
+
 import re
 import logging
 import os
@@ -30,14 +31,12 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
 
-
 def filter_datum(fields: List[str],
                  redaction: str,
                  message: str,
                  separator: str) -> str:
     """
     Obfuscates a message according to PII fields
-
     Args:
         fields:       fields to obfuscate
         redaction:    represents by what the field will be obfuscated
@@ -46,13 +45,12 @@ def filter_datum(fields: List[str],
                       in the log line (message)
     Returns:
     -------
-        Protected log message
+        obfuscated log message
     """
     for field in fields:
         message = re.sub(rf"{field}=.*?{separator}",
                          f"{field}={redaction}{separator}", message)
     return message
-
 
 def get_logger() -> logging.Logger:
     """[Function that create a Logger]
