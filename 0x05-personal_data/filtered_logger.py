@@ -15,14 +15,13 @@ def filter_datum(fields: List[str],
     """ returns the log message obfuscated """
 
     for field in fields:
-        message = re.sub(
-            '(?<={:s}=)[^;]*'.format(field), redaction, message)
-    return re.sub(";", separator, message)
+        message = re.sub(rf"{field}=.*?{separator}",
+                         f"{field}={redaction}{separator}", message)
+    return message
 
 
 class RedactingFormatter(logging.Formatter):
-    """ Redacting Formatter class
-        """
+    """ Redacting Formatter class"""
 
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
