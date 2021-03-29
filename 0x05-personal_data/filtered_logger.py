@@ -11,6 +11,7 @@ import os
 from typing import List
 import mysql.connector
 
+
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
@@ -81,8 +82,8 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     """
 
     dbName = os.environ.get("PERSONAL_DATA_DB_NAME")
-    dbUserName = os.environ.get("PERSONAL_DATA_DB_USERNAME")
-    dbUserPassword = os.environ.get("PERSONAL_DATA_DB_PASSWORD")
+    dbUserName = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    dbUserPassword = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
     dbHost = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
 
     dbConnector = mysql.connector.connect(user=dbUserName, password=dbUserPassword,
