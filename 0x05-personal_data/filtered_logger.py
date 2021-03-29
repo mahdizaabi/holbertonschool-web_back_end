@@ -31,6 +31,7 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
 
+
 def filter_datum(fields: List[str],
                  redaction: str,
                  message: str,
@@ -51,6 +52,7 @@ def filter_datum(fields: List[str],
         message = re.sub(rf"{field}=.*?{separator}",
                          f"{field}={redaction}{separator}", message)
     return message
+
 
 def get_logger() -> logging.Logger:
     """[Function that create a Logger]
