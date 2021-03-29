@@ -10,8 +10,6 @@ import logging
 from typing import List
 
 
-
-
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class """
 
@@ -50,3 +48,4 @@ def filter_datum(fields: List[str],
         message = re.sub(rf"{field}=.*?{separator}",
                          f"{field}={redaction}{separator}", message)
     return message
+
