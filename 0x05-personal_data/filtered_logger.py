@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-1. Regex-ing
+Module for filtered_logger
+0x05-personal_data
+Holberton Web Stack programming Spec ― Back-end
 """
-
 import re
 import logging
+import os
 from typing import List
 
 
@@ -21,7 +23,7 @@ class RedactingFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         """
-        Method that filters values in incoming log records using `filter_datum`
+        filter the log message
         """
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
@@ -32,21 +34,18 @@ def filter_datum(fields: List[str],
                  message: str,
                  separator: str) -> str:
     """
-    Obfuscates a  log message 
+    Obfuscates a log message
+
     Args:
         fields:       fields to obfuscate
-        redaction:    represents by what the field will be obfuscated
-        message:      the log line
-        separator:    string by which character is separating all fields
-                      in the log line (message)
+        redaction:    redaction
+        message:      log message to obfuscate
+        separator:    a string representing by which character
     Returns:
     -------
-        obfuscated message
+        Protected log message
     """
     for field in fields:
         message = re.sub(rf"{field}=.*?{separator}",
                          f"{field}={redaction}{separator}", message)
     return message
-
-if __name__ == "__main__":
-    main()
