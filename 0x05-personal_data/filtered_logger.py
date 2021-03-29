@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Module for filtered_logger
-0x05-personal_data
+0x05-personal_dat
 Holberton Web Stack programming Spec ― Back-end
 """
 import re
