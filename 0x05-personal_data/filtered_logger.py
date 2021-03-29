@@ -37,4 +37,5 @@ class RedactingFormatter(logging.Formatter):
         NotImplementedError
 
         formatted = logging.Formatter(self.FORMAT).format(record)
-        return filter_datum(self.fields, self.__class__.REDACTION, formatted, self.__class__.SEPARATOR)
+        return filter_datum(self.fields, self.__class__.REDACTION, formatted,
+                            self.__class__.SEPARATOR)
