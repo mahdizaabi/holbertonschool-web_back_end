@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-0. Regex-ing
+1. Regex-ing
 """
 
 import re
@@ -47,3 +47,6 @@ def filter_datum(fields: List[str],
         message = re.sub(rf"{field}=.*?{separator}",
                          f"{field}={redaction}{separator}", message)
     return message
+
+if __name__ == "__main__":
+    main()
