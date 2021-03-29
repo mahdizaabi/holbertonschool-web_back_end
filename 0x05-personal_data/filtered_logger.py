@@ -7,7 +7,10 @@ import re
 import logging
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: List[str],
+                 redaction: str,
+                 message: str,
+                 separator: str) -> str:
     """ returns the log message obfuscated """
 
     for field in fields:
@@ -33,5 +36,3 @@ class RedactingFormatter(logging.Formatter):
 
         formatted = logging.Formatter(self.FORMAT).format(record)
         return filter_datum(self.fields, self.__class__.REDACTION, formatted, self.__class__.SEPARATOR)
-
-
