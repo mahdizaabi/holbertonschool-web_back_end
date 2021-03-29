@@ -29,13 +29,12 @@ class RedactingFormatter(logging.Formatter):
 
     def __init__(self, fields):
         """ Constructor"""
-        super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
+        super(RedactingFormatter, self).__init__(self.FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
         """ format """
         NotImplementedError
 
-        formatted = logging.Formatter(self.FORMAT).format(record)
-        return filter_datum(self.fields, self.__class__.REDACTION, formatted,
-                            self.__class__.SEPARATOR)
+        return filter_datum(self.fields, self.REDACTION,
+                            super().format(record), self.SEPARATOR)
