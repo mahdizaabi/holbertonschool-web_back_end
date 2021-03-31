@@ -30,6 +30,6 @@ def stats() -> str:
 def unauthorized() -> str:
     """GET /api/v1/unauthorized
     Return:
-      - test error handler
+      - abort request with 401 status code
     """
-    abort(401)
+    return abort(401)
