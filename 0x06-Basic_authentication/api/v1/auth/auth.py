@@ -37,7 +37,7 @@ class Auth():
         if not path.endswith('/'):
             path += '/'
         for allowed in openAccess:
-            if allowed.path.split("/")[len(path.split("/")) - 1][:-1] in path:
+            if allowed.split("/")[len(allowed.split("/")) - 1][:-1] in path:
                 return False
 
         return True if path not in new_list else False
