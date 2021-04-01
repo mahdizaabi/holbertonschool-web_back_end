@@ -27,17 +27,23 @@ class Auth():
         if path is None or excluded_paths == [] or excluded_paths is None:
             return True
         new_list = []
+        openAccess = []
         for exluded_path in excluded_paths:
             if not exluded_path.endswith('/'):
+                if exluded_path.endswith('*'):
+                    openAccess.append(exluded_path)
                 exluded_path += '/'
             new_list.append(exluded_path)
         if not path.endswith('/'):
             path += '/'
+        for allowed in openAccess:
+            if allowed.path.split("/")[len(path.split("/")) - 1][:-1] in path:
+                return False
 
         return True if path not in new_list else False
 
     def authorization_header(self, request=None) -> str:
-        """[validate requests]
+        """[return the value of the header request Authorization]
 
         Args:
             request ([type], optional): [description]. Defaults to None.
