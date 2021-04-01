@@ -36,7 +36,7 @@ class Auth():
 
         if path not in new_list:
             return True
-        else:
+        if path in new_list:
             return False
 
     def authorization_header(self, request=None) -> str:
