@@ -17,6 +17,7 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 auth = os.getenv('AUTH_TYPE')
 if os.getenv("AUTH_TYPE") == "auth":
+    app.logger.info("env varaible accessed")
     from api.v1.auth.auth import Auth
     auth = Auth()
 
@@ -49,9 +50,9 @@ def beforeRequestHandler():
     filtering requests
     """
     if auth is None:
-        return
+        return None
     if auth.require_auth(request.path, ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']) is False:
-        pass
+        return None
     if auth.authorization_header(request) is None:
         return abort(401)
     if auth.current_user(request) is None:
