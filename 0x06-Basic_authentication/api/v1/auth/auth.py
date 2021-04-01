@@ -24,9 +24,7 @@ class Auth():
         Returns:
             bool: [true if authentication need, false otherwise]
         """
-        if path is None:
-            return True
-        if len(excluded_paths) == 0 or excluded_paths is None:
+        if path is None or len(excluded_paths) == 0 or excluded_paths is None:
             return True
         new_list = []
         for exluded_path in excluded_paths:
@@ -42,7 +40,7 @@ class Auth():
             return False
 
     def authorization_header(self, request=None) -> str:
-        """[summary]
+        """[summmary]
 
         Args:
             request ([type], optional): [description]. Defaults to None.
