@@ -9,7 +9,6 @@ from flask import request
 from typing import List, TypeVar
 
 
-
 class Auth():
     """
     Auth class that manage the API Authentication
@@ -47,7 +46,9 @@ class Auth():
             str: [description]
         """
 
-        if request is None or request.headers.get('Authorization', None) is None:
+        if request is None:
+            return None
+        if request.headers.get('Authorization', None) is None:
             return None
         return request.headers.get('Authorization')
 
