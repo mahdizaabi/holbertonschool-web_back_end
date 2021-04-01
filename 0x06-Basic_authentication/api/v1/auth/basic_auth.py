@@ -87,7 +87,6 @@ class BasicAuth(Auth):
             return None
         if user_pwd is None or type(user_pwd) is not str:
             return None
-        print(len(User.all()))
         if len(User.all()) == 0:
             return User(user_email, user_pwd)
 
