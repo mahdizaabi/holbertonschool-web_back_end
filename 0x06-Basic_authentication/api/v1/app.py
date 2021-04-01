@@ -19,6 +19,9 @@ auth = os.getenv('AUTH_TYPE')
 if os.getenv("AUTH_TYPE") == "auth":
     from api.v1.auth.auth import Auth
     auth = Auth()
+elif os.getenv("AUTH_TYPE") == "basic_auth":
+    from api.v1.auth.basic_auth import BasicAuth
+    auth = BasicAuth()
 
 
 @app.errorhandler(404)
@@ -43,7 +46,7 @@ def accessForbidden(error) -> str:
 
 
 @app.before_request
-def beforeRequestHandler():
+def beforeRequestHandler() -> str:
     """
     check for user authentication before each request
     filtering requests
@@ -51,7 +54,7 @@ def beforeRequestHandler():
     if auth is None:
         return
     if auth.require_auth(request.path, ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']) is False:
-        pass
+        return None
     if auth.authorization_header(request) is None:
         return abort(401)
     if auth.current_user(request) is None:

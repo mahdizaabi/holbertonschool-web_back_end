@@ -9,7 +9,6 @@ from flask import request
 from typing import List, TypeVar
 
 
-
 class Auth():
     """
     Auth class that manage the API Authentication
