@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-""" Module for Authentication
+""" 
+Module for Authentication
+0x06-Basic_authentication
+holbertonschool-web_back_end
 """
 
 from flask import request
@@ -12,14 +15,14 @@ class Auth():
     """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """[summary]
+        """[Check if a specific path need authentication]
 
         Args:
-            path (str): [description]
-            excluded_paths (List[str]): [description]
+            path (str): [path to check]
+            excluded_paths (List[str]): [list of excluded paths]
 
         Returns:
-            bool: [description]
+            bool: [true if authentication need, false otherwise]
         """
         if path is None:
             return True
