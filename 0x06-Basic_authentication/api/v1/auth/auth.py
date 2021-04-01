@@ -9,6 +9,7 @@ from flask import request
 from typing import List, TypeVar
 
 
+
 class Auth():
     """
     Auth class that manage the API Authentication
@@ -37,7 +38,7 @@ class Auth():
         return True if path not in new_list else False
 
     def authorization_header(self, request=None) -> str:
-        """[summmary]
+        """[validate requests]
 
         Args:
             request ([type], optional): [description]. Defaults to None.
@@ -45,7 +46,10 @@ class Auth():
         Returns:
             str: [description]
         """
-        return None
+
+        if request is None or request.headers.get('Authorization', None) is None:
+            return None
+        return request.headers.get('Authorization')
 
     def current_user(self, request=None) -> TypeVar('User'):
         """[summary]
