@@ -62,8 +62,8 @@ class BasicAuth(Auth):
         """[returns the user email and password from the Base64 decoded value.]
 
         Args:
-            self ([type]): [description]
-            str ([type]): [description]
+            decoded_base64 ([str]): [decoded b64 authorization header]
+        Return: Tuple (email, password)
         """
 
         if decoded_base64_authorization_header is None:
@@ -72,7 +72,8 @@ class BasicAuth(Auth):
             return (None, None)
         if ":" not in decoded_base64_authorization_header:
             return (None, None)
-        return tuple(decoded_base64_authorization_header.split(":"))
+        emailAndPass = decoded_base64_authorization_header.split(':', 1)
+        return tuple(emailAndPass)
 
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
