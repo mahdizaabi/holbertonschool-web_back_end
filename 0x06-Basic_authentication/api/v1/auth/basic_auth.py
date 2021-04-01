@@ -31,6 +31,7 @@ class BasicAuth(Auth):
         return authorization_header[6:]
 
     def isBase64(self, s):
+        """ Check if valide decoded Base64"""
         try:
             return base64.b64encode(base64.b64decode(s)).decode('utf-8') == s
         except Exception:
