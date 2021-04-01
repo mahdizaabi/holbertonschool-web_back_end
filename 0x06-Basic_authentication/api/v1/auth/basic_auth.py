@@ -107,6 +107,6 @@ class BasicAuth(Auth):
                 Authorization)
             decodedb64 = self.decode_base64_authorization_header(extractb64)
             userCredential = self.extract_user_credentials(decodedb64)
-            userInstance = self.user_object_from_credentials(userCredential)
+            userInstance = self.user_object_from_credentials(userCredential[0][1])
             return userInstance
         return None
