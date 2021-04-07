@@ -50,14 +50,17 @@ def beforeRequestHandler() -> str:
     """
 
     x = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+
     if auth is None:
         return None
+
     if auth.require_auth(request.path, x) is False:
         return None
     if auth.authorization_header(request) is None:
         return abort(401)
     if auth.current_user(request) is None:
         return abort(403)
+    request.current_user = auth.current_user(request)
 
 
 if __name__ == "__main__":
