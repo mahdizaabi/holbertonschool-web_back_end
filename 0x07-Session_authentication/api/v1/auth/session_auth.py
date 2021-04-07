@@ -55,7 +55,7 @@ class SessionAuth(Auth):
         userId = sessions.get(session_id, None)
         return userId
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None):
         """[Get user instance bases on his session ID]
 
         Args:
