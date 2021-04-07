@@ -52,17 +52,22 @@ def beforeRequestHandler() -> str:
     filtering requests
     """
 
-    x = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    x = ['/api/v1/status/', '/api/v1/unauthorized/',
+         '/api/v1/forbidden/', '/api/v1/auth_session/login/']
 
     if auth is None:
         return None
 
     if auth.require_auth(request.path, x) is False:
         return None
+    # user may be already loggedin so request has no auth header
+    # but request has session cookie
     if auth.authorization_header(request) is None:
-        return abort(401)
+        if auth.session_cookie(request) is None:
+            return abort(401)
     if auth.current_user(request) is None:
         return abort(403)
+
     request.current_user = auth.current_user(request)
 
 
