@@ -64,7 +64,6 @@ class SessionAuth(Auth):
         Returns:
             User Instance(User class object)
         """
-
         sessionId = self.session_cookie(request)
         userId = self.user_id_for_session_id(sessionId)
         user_instance = User.get(userId)
