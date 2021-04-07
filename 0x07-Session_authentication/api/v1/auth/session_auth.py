@@ -54,3 +54,17 @@ class SessionAuth(Auth):
         sessions = self.__class__.user_id_by_session_id
         userId = sessions.get(session_id, None)
         return userId
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """[Get user instance bases on his session ID]
+
+        Args:
+            request ([type], optional): [description]. Defaults to None.
+        """
+
+        sessionId = self.session_cookie(request)
+        print(sessionId)
+        userId = self.user_id_for_session_id(sessionId)
+        print(userId)
+        user_instance = User.get(userId)
+        return user_instance
