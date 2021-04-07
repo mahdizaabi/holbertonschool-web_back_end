@@ -59,12 +59,13 @@ class SessionAuth(Auth):
         """[Get user instance bases on his session ID]
 
         Args:
-            request ([type], optional): [description]. Defaults to None.
+            request ([Flask obj], optional): [description]. Defaults to None.
+
+        Returns:
+            User Instance(User class object)
         """
 
         sessionId = self.session_cookie(request)
-        print(sessionId)
         userId = self.user_id_for_session_id(sessionId)
-        print(userId)
         user_instance = User.get(userId)
         return user_instance
