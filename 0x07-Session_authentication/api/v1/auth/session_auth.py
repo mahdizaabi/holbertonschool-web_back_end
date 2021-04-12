@@ -43,7 +43,7 @@ class SessionAuth(Auth):
         """[Retrieve user_id based on the Session_id]
 
         Args:
-            session_id (str, optional): [Session id]. 
+            session_id (str, optional): [Session id].
 
         Returns:
             str: [user id] or None(if session id dosent'match any user id)
