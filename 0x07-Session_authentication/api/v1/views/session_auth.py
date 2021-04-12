@@ -33,8 +33,9 @@ def auth_assign():
     return jsonified_user
 
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
-def delete_and_logout_session():
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_and_logout_session() -> str:
     """[delete_and_logout_session]
     """
     if auth.destroy_session(request) is False:
