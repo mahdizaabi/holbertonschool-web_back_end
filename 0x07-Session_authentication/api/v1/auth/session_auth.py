@@ -40,7 +40,7 @@ class SessionAuth(Auth):
         return self.id
 
     def user_id_for_session_id(self, session_id: str = None) -> str:
-        """[Retrieve user_id based on the Session_id]
+        """[Retrdieve user_id based on the Session_id]
 
         Args:
             session_id (str, optional): [Session id].
