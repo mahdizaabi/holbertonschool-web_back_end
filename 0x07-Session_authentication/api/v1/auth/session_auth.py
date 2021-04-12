@@ -46,7 +46,7 @@ class SessionAuth(Auth):
             session_id (str, optional): [Session id]. 
 
         Returns:
-            str: [user id]
+            str: [user id] or None(if session id dosent'match any user id)
         """
 
         if session_id is None or type(session_id) is not str:
@@ -65,3 +65,18 @@ class SessionAuth(Auth):
         userId = self.user_id_for_session_id(sessionId)
         user_instance = User.get(userId)
         return user_instance
+
+    def destroy_session(self, request=None):
+        """[destroy_session]
+
+        Args:
+            request ([flask request], optional): [description].
+        """
+        if request is None:
+            return False
+        if self.session_cookie(request) is None:
+            return False
+        if self.user_id_for_session_id(self.session_cookie(request)) is None:
+            return False
+        Session_id = self.session_cookie(request)
+        self.user_id_by_session_id.pop(Session_id)
