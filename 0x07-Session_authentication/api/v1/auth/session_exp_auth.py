@@ -45,7 +45,6 @@ class SessionExpAuth(SessionAuth):
 
         self.user_id_by_session_id[sid] = {
             "user_id": user_id, "created_at": datetime.now()}
-        print(self.user_id_by_session_id)
         return sid
 
     def user_id_for_session_id(self, session_id=None):
