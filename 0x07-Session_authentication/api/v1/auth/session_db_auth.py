@@ -43,8 +43,12 @@ class SessionDBAuth(SessionExpAuth):
             session_id ([type], optional): [description]. Defaults to None.
         """
 
+        UserSession.load_from_file()
         obj = UserSession.search({"session_id": session_id})
         if obj is None or len(obj) == 0:
+            return None
+        runTime = obj[0].created_at + timedelta(seconds=self.session_duration)
+        if runTime < datetime.now():
             return None
         return obj[0].user_id
 
