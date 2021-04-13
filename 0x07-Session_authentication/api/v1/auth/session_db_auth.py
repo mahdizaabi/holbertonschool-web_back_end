@@ -46,10 +46,6 @@ class SessionDBAuth(SessionExpAuth):
         obj = UserSession.search({"session_id": session_id})
         if obj is None or len(obj) == 0:
             return None
-        limit_date = (timedelta(seconds=self.session_duration) +
-                      objs[0].created_at)
-        if limit_date < datetime.now():
-            return None
         return obj[0].user_id
 
     def destroy_session(self, request=None):
