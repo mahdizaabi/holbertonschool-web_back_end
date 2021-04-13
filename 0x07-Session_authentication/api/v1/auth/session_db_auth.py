@@ -62,6 +62,9 @@ class SessionDBAuth(SessionExpAuth):
         Args:
             request ([type], optional): [description]. Defaults to None.
         """
+
+        if request is None:
+            return None
         session_id = self.session_cookie(request)
         if session_id is None:
             return None
