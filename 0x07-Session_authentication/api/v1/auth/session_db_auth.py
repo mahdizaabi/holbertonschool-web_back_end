@@ -59,7 +59,11 @@ class SessionDBAuth(SessionExpAuth):
             request ([type], optional): [description]. Defaults to None.
         """
         session_id = self.session_cookie(request)
+        if session_id is None:
+            return None
         del self.user_id_by_session_id[session_id]
         objToDelete = UserSession.search({"session_id": session_id})
         if objToDelete and len(objToDelete) != 0:
             objToDelete[0].remove()
+        else:
+            return None
