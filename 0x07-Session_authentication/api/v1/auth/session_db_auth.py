@@ -29,7 +29,11 @@ class SessionDBAuth(SessionExpAuth):
         Args:
             user_id ([type], optional): [description]. Defaults to None.
         """
+        if user_id is None:
+            return None
         SessionId = super().create_session(user_id)
+        if SessionId is None:
+            return None
         usInstance = UserSession()
         usInstance.user_id = user_id
         usInstance.session_id = SessionId
