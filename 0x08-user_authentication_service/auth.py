@@ -64,15 +64,17 @@ class Auth:
             data stored on the Database, false otherweise.
         """
 
+        if email is None or password is None:
+            return None
         try:
             user = self._db.find_user_by(email=email)
+            encodedPassword = password.encode('utf-8')
             if user:
-                test_pwd = _hash_password(password)
-                if test_pwd == user.hashed_password:
+                if bcrypt.checkpw(encodedPassword, user.hashed_password):
                     return True
                 else:
                     return False
             else:
                 False
         except Exception as e:
-            pass
+            return False
