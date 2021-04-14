@@ -20,6 +20,8 @@ def users():
     """
     email = request.form.get('email')
     password = request.form.get('password')
+    if email is None or password is None:
+        return None
 
     try:
         AUTH.register_user(email, password)
