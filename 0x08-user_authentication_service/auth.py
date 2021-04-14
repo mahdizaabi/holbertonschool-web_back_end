@@ -86,3 +86,27 @@ class Auth:
                 False
         except Exception as e:
             return False
+
+    def create_session(self, email: str) -> str:
+        """[create_session]
+
+        Args:
+            email (str): [User email]
+
+        Returns:
+            str: [Session ID]
+        """
+
+        if email is None:
+            return None
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                sid = _generate_uuid()
+                self._db.update_user(user.id, session_id=sid)
+                return sid
+            else:
+                return None
+
+        except Exception as e:
+            return None
