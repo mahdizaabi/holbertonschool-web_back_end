@@ -29,12 +29,12 @@ class Auth:
     """
 
     def __init__(self):
-        """[summary]
+        """[DB Higher abstraction layer proxied by Auth]
         """
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """[summary]
+        """[REGISTER NEW USER]
 
         Args:
             email ([type]): [description]
@@ -48,3 +48,25 @@ class Auth:
             pass
         hashed = _hash_password(password)
         return self._db.add_user(email, hashed)
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """[Validate PASSWORD and EMAIL FOR AN EXISTING USER]
+
+        Args:
+            email ([str]): [Email entred by a user]
+            password ([str]): [Password entred by a user]
+        Returns:
+            True if the Credential(from user input) match the credential
+            data stored on the Database, false otherweise.
+        """
+
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                test_pwd = _hash_password(password)
+                if test_pwd = user.hashed_password:
+                    return True
+                else:
+                    return False
+            else:
+                False
