@@ -56,3 +56,19 @@ class DB:
         if user is None:
             raise NoResultFound
         return user
+
+    def update_user(self, user_id: str, **kwargs) -> None:
+        """[update_user]
+
+        Args:
+            user_id ([str]): [description]
+        """
+
+        dec = list(kwargs.items())
+        user = self.find_user_by(id=user_id)
+        if dec[0][0] in user.__dict__:
+            self._session.delete(user)
+            setattr(user, dec[0][0], dec[0][1])
+            self._session.commit()
+        else:
+            raise ValueError
