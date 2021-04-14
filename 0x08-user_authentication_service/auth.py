@@ -25,7 +25,7 @@ def _hash_password(password: str) -> str:
     return hashed
 
 
-def _generate_uuid(self) -> str:
+def _generate_uuid() -> str:
     """[sumGenerate UUIDsmary]
     """
 
