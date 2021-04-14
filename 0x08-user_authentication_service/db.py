@@ -69,7 +69,7 @@ class DB:
         dec = list(kwargs.items())
         user = self.find_user_by(id=user_id)
         if not hasattr(user, dec[0][0]):
-                raise ValueError
-            else:
-                setattr(user, dec[0][0],  dec[0][1])
+            raise ValueError
+        else:
+            setattr(user, dec[0][0],  dec[0][1])
         self._session.commit()
