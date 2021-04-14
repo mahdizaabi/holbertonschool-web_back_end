@@ -25,6 +25,13 @@ def _hash_password(password: str) -> str:
     return hashed
 
 
+def _generate_uuid(self) -> str:
+    """[sumGenerate UUIDsmary]
+    """
+
+    return str(uuid.uuid())
+
+
 class Auth:
     """Auth class to interact with the authentication database.
        Highe level abstraction layer for the DB .
@@ -79,9 +86,3 @@ class Auth:
                 False
         except Exception as e:
             return False
-
-    def _generate_uuid(self) -> str:
-        """[sumGenerate UUIDsmary]
-        """
-
-        return str(uuid.uuid())
