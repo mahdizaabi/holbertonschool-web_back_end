@@ -32,12 +32,10 @@ def users():
 
 
 @app.route('/sessions', methods=['POST'])
-def login():
-    """[log the user in by:
-        - creating a new session
-        - send the session Id on the response as an HTTP header]
-    """
-
+def sessions():
+    """ create a new session for the user,
+    store it the session ID as a cookie with key "session_id" on the response
+    and return a JSON payload """
     email = request.form.get('email')
     password = request.form.get('password')
     if not AUTH.valid_login(email, password):
