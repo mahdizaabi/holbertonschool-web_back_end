@@ -111,8 +111,15 @@ class Auth:
         except NoResultFound:
             return None
 
-    def get_user_from_session_id(self, session_id: str) -> str:
-        """ returns the corresponding user """
+    def get_user_from_session_id(self, session_id: str) -> User:
+        """[get_user_from_session_id]
+
+        Args:
+            session_id (str): [Session identifier]
+
+        Returns:
+            User: [Return User instance if user found, None otherwise]
+        """
         if not session_id:
             return None
         try:
@@ -128,6 +135,8 @@ class Auth:
             user_id (int): [description]
             return Non
         """
+        if not user_id:
+            return None
         try:
             user = self._db.update_user(user_id, session_id=None)
             return None
