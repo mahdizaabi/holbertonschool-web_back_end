@@ -11,6 +11,7 @@ from db import DB
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from user import User
+import uuid
 
 
 def _hash_password(password: str) -> str:
@@ -78,3 +79,9 @@ class Auth:
                 False
         except Exception as e:
             return False
+
+    def _generate_uuid(self) -> str:
+        """[sumGenerate UUIDsmary]
+        """
+
+        return uuid.uuid1()
