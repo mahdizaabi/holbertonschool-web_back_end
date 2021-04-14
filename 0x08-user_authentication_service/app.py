@@ -1,25 +1,17 @@
 #!/usr/bin/env python3
-"""
-Route module for the API
-"""
-from os import getenv
-from api.v1.views import app_views
-from flask import Flask, jsonify, abort, request
-from flask_cors import (CORS, cross_origin)
-import os
+""" a basic Flask app. """
+from flask import Flask, jsonify, request, abort, make_response, redirect
+from auth import Auth
 
+
+AUTH = Auth()
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'], strict_slashes=False)
-def welcome_home() -> str:
-    """[summary]
+@app.route('/', methods=['GET'])
+def welcome():
+    """ returns a message when the route / is requested """
+    return jsonify({"message": "Bienvenue"})
 
-    Returns:
-        str: [description]
-    """
-    return jsonify({"message: "Bienvenue"})
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000")
