@@ -6,9 +6,10 @@ holbertonschool-web_back_end
 """
 
 import bcrypt
+from typing import ByteString
 
 
-def _hash_password(password: str) -> str:
+def _hash_password(password: str) -> ByteString:
     """[Password encryption]
     Args:
     password (str): [salted hash]
