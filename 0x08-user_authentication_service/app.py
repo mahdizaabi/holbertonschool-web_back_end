@@ -8,8 +8,10 @@ from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 import os
 
+app = Flask(__name__)
 
-@app_views.route('/', methods=['GET'], strict_slashes=False)
+
+@app.route('/', methods=['GET'], strict_slashes=False)
 def welcome_home() -> str:
     """[summary]
 
