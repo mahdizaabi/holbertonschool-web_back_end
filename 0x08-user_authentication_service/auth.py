@@ -29,7 +29,7 @@ def _generate_uuid(self) -> str:
     """[sumGenerate UUIDsmary]
     """
 
-    return str(uuid.uuid())
+    return str(uuid.uuid4())
 
 
 class Auth:
