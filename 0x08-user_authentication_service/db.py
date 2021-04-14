@@ -67,12 +67,10 @@ class DB:
             user_id ([str]): [description]
         """
 
-        dec = list(kwargs.items())
         user = self.find_user_by(id=user_id)
-        if dec[0][0] in user.__dict__:
-            self._session.delete(user)
-            setattr(user, dec[0][0], dec[0][1])
-            self._session.commit()
-            return None
-        else:
-            raise ValueError
+        for k, v in kwargs.items():
+            if not hasattr(user, k):
+                raise ValueError
+            else:
+                setattr(user, k, v)
+        self._session.commit()
