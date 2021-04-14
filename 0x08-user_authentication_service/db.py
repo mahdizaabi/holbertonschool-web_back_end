@@ -70,5 +70,6 @@ class DB:
             self._session.delete(user)
             setattr(user, dec[0][0], dec[0][1])
             self._session.commit()
+            return None
         else:
             raise ValueError
