@@ -41,8 +41,11 @@ class DB:
 
     def find_user_by(self, **kwargs) -> User:
         """
+        Description: Find a user by keyword argument
         Args:
-            keyword ([type]): [description]
+            keyword argument([dict]): [user Input]
+        Return:
+            user instance if user exist or raise an Error
         """
 
         try:
