@@ -86,10 +86,11 @@ def get_reset_password_token():
 
     if email is None:
         abort(403)
-    user = AUTH.get_user_from_session_id(SID)
-    if user is None:
+    try:
+        token = AUTH.get_reset_password_token(email)
+    except Exception as e:
         abort(403)
-    token = AUTH.get_reset_password_token(email)
+
     return jsonify({"email": email, "reset_token": token}), 200
 
 
