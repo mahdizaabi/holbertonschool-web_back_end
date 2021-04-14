@@ -125,6 +125,6 @@ class Auth:
             user = self._db.find_user_by(session_id)
         except Exception as e:
             return None
-         if user is None:
+        if user is None:
             return None
         return user
