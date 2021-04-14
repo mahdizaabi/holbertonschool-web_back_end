@@ -34,8 +34,7 @@ def users():
 @app.route('/sessions', methods=['POST'])
 def sessions():
     """ create a new session for the user,
-    store it the session ID as a cookie with key "session_id" on the response
-    and return a JSON payload """
+    """
     email = request.form.get('email')
     password = request.form.get('password')
     if not AUTH.valid_login(email, password):
