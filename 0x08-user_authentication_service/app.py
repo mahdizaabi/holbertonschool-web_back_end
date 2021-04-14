@@ -80,7 +80,7 @@ def profile():
 
 @app.route('/reset_password', methods=['POST'])
 def get_reset_password_token():
-    """[reset password]
+    """[reset password and get token]
     """
     email = request.form.get('email')
 
@@ -92,6 +92,23 @@ def get_reset_password_token():
         abort(403)
 
     return jsonify({"email": email, "reset_token": token}), 200
+
+
+@app.route('/reset_password', methods=['PUT'])
+def update_password():
+    """[update password]
+    """
+    email = request.form.get('email')
+    token = request.form.get('reset_token')
+    new_password = request.form.get('new_password')
+
+    if email is None or token is None or new_password is None:
+        abort(403)
+    try:
+        AUTH.update_password(token, new_password)
+        return jsonify({"email": email, "message": "Password updated"})
+    except Exception as e:
+        abort(403)
 
 
 if __name__ == '__main__':
