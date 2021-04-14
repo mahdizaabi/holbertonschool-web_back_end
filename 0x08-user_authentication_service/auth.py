@@ -122,7 +122,7 @@ class Auth:
         """
 
         try:
-            user = self._db.find_user_by(session_id)
+            user = self._db.find_user_by(session_id=session_id)
         except Exception as e:
             return None
         if user is None:
