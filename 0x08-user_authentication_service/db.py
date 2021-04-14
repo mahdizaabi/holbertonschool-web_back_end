@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """
-DB model
-0x08. User authentication service
-holbertonschool-web_back_end
+Database class
 """
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -31,48 +29,43 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """ saves a new user to the database """
-        user = User()
-        user.email = email
-        user.hashed_password = hashed_password
+        """ This method saves a new user to the database """
+        user = User(email=email, hashed_password=hashed_password)
         self._session.add(user)
         self._session.commit()
         return user
 
     def find_user_by(self, **kwargs) -> User:
         """
-        Description: Find a user by keyword argument
-        Args:
-            keyword argument([dict]): [user Input]
-        Return:
-            user instance if user exist or raise an Error
+        This method takes in arbitrary keyword arguments
+        and returns the first row found in the users table
+        as filtered by the method’s input arguments.
         """
-
+        if kwargs is None:
+            raise InvalidRequestError
+        for k in kwargs.keys():
+            if not hasattr(User, k):
+                raise InvalidRequestError
         try:
-            dec = list(kwargs.items())
-            user = self._session.query(User).filter(
-                getattr(User, dec[0][0]) == dec[0][1]).first()
+            user = self._session.query(User).filter_by(**kwargs).first()
         except InvalidRequestError:
             raise InvalidRequestError
-        except AttributeError:
-            raise NoResultFound
         if user is None:
             raise NoResultFound
-        return user
+        else:
+            return user
 
     def update_user(self, user_id: int, **kwargs) -> None:
-        """[update_user]
-
-        Args:
-            user_id ([str]): [description]
         """
-
-        dec = list(kwargs.items())
+        The method will use find_user_by to locate the user to update,
+        then will update the user’s attributes
+        as passed in the method’s arguments
+        then commit changes to the database.
+        """
         user = self.find_user_by(id=user_id)
-        if dec[0][0] in user.__dict__:
-            self._session.delete(user)
-            setattr(user, dec[0][0], dec[0][1])
-            self._session.commit()
-            return None
-        else:
-            raise ValueError
+        for k, v in kwargs.items():
+            if not hasattr(user, k):
+                raise ValueError
+            else:
+                setattr(user, k, v)
+        self._session.commit()
