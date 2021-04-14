@@ -73,3 +73,21 @@ class DB:
         else:
             setattr(user, dec[0][0],  dec[0][1])
             self._session.commit()
+
+    def get_user_from_session_id(self, session_id: str) -> User:
+        """[summary]
+
+        Args:
+            session_id (str): [description]
+
+        Returns:
+            User: [description]
+        """
+
+        try:
+            user = self.find_user_by(session_id)
+            if user is None:
+                return None
+            return user
+        except Exception as e:
+            return None
