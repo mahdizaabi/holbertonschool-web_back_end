@@ -26,10 +26,11 @@ def _hash_password(password: str) -> str:
 
 class Auth:
     """Auth class to interact with the authentication database.
+       Highe level abstraction layer for the DB .
     """
 
     def __init__(self):
-        """[DB Higher abstraction layer proxied by Auth]
+        """[Instantiate a new DB-Auth instance]
         """
         self._db = DB()
 
@@ -39,6 +40,9 @@ class Auth:
         Args:
             email ([type]): [description]
             password ([type]): [description]
+        Returns:
+            User instance of the new registred user or raise an error
+            if the user already exists
         """
         try:
             user = self._db.find_user_by(email=email)
@@ -64,9 +68,11 @@ class Auth:
             user = self._db.find_user_by(email=email)
             if user:
                 test_pwd = _hash_password(password)
-                if test_pwd = user.hashed_password:
+                if test_pwd == user.hashed_password:
                     return True
                 else:
                     return False
             else:
                 False
+        except Exception as e:
+            pass
