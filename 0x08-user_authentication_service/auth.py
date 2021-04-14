@@ -12,6 +12,7 @@ from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
 from user import User
 
+
 def _hash_password(password: str) -> str:
     """[Password encryption]
     Args:
@@ -45,8 +46,5 @@ class Auth:
                 raise ValueError("User {} already exists".format(user))
         except NoResultFound:
             pass
-        except InvalidRequestError:
-            pass
-
         hashed = _hash_password(password)
         return self._db.add_user(email, hashed)
