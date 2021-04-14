@@ -16,7 +16,7 @@ def welcome():
 
 @app.route('/users', methods=['POST'])
 def users():
-    """[summary]
+    """[Get user input and register a new USER]
     """
     email = request.form.get('email')
     password = request.form.get('password')
@@ -29,6 +29,30 @@ def users():
                         "message": "user created"})
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
+
+
+@app.route('/sessions', methods=['POST'])
+def login():
+    """[log the user in by:
+        - creating a new session
+        - send the session Id on the response as an HTTP header]
+    """
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if email is None or password is None:
+        return None
+    try:
+        if AUTH.valid_login(email, password):
+            SID = AUTH.create_session(email)
+            resp = make_response(
+                jsonify({"email": email, "message": "logged in"}))
+            resp.set_cookie("session_id", SID)
+            return resp
+        else:
+            return abort(401)
+    except Exception as e:
+        return abort(401)
 
 
 if __name__ == '__main__':
