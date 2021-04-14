@@ -84,4 +84,4 @@ class Auth:
         """[sumGenerate UUIDsmary]
         """
 
-        return uuid.uuid()
+        return str(uuid.uuid())
