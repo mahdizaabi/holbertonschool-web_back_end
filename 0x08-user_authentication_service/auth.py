@@ -112,7 +112,7 @@ class Auth:
             return None
 
     def get_user_from_session_id(self, session_id: str) -> User:
-        """[summary]
+        """[retrieve user by session_id]
 
         Args:
             session_id (str): [description]
@@ -123,8 +123,8 @@ class Auth:
 
         try:
             user = self._db.find_user_by(session_id)
-            if user is None:
-                return None
-            return user
         except Exception as e:
             return None
+         if user is None:
+            return None
+        return user
