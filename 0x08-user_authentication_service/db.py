@@ -66,11 +66,10 @@ class DB:
         Args:
             user_id ([str]): [description]
         """
-
+        dec = list(kwargs.items())
         user = self.find_user_by(id=user_id)
-        for k, v in kwargs.items():
-            if not hasattr(user, k):
+        if not hasattr(user, dec[0][0]):
                 raise ValueError
             else:
-                setattr(user, k, v)
+                setattr(user, dec[0][0],  dec[0][1])
         self._session.commit()
