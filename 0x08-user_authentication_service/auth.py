@@ -118,7 +118,7 @@ class Auth:
             session_id (str): [description]
 
         Returns:
-            User: [description]
+            User if user exist, None otherwise
         """
 
         try:
@@ -130,12 +130,6 @@ class Auth:
         return user
 
     def destroy_session(self, user_id: int) -> None:
-        """[summary]
-
-        Args:
-            user_id (int): [description]
-        """
-        try:
-            user = self._db.update_user(user_id, session_id=None)
-        except Exception as e:
-            return None
+        """ The method updates the corresponding user’s session ID to None """
+        self._db.update_user(user_id, session_id=None)
+        return None
