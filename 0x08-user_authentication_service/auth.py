@@ -9,9 +9,9 @@ import bcrypt
 
 
 def _hash_password(password: str) -> str:
-    """[summary]
+    """[Password encryption]
     Args:
-    password (str): [description]
+    password (str): [salted hash]
     """
 
     salt = bcrypt.gensalt()
