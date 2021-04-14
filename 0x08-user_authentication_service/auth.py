@@ -94,7 +94,7 @@ class Auth:
             email (str): [User email]
 
         Returns:
-            str: [Session ID]
+            str: [Session ID] if user is Found, None otherwise
         """
 
         if email is None:
