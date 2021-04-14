@@ -8,7 +8,7 @@ holbertonschool-web_back_end
 import bcrypt
 
 
-def _hash_password(password: str):
+def _hash_password(password: str) -> str:
     """[summary]
     Args:
     password (str): [description]
