@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Database class
+DB model
+0x08. User authentication service
+holbertonschool-web_back_end
 """
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -35,4 +37,22 @@ class DB:
         user.hashed_password = hashed_password
         self._session.add(user)
         self._session.commit()
+        return user
+
+    def find_user_by(self, **kwargs):
+        """
+        Args:
+            keyword ([type]): [description]
+        """
+
+        try:
+            dec = list(kwargs.items())
+            user = self._session.query(User).filter(
+                getattr(User, dec[0][0]) == dec[0][1]).first()
+        except InvalidRequestError:
+            raise InvalidRequestError
+        except AttributeError:
+            raise NoResultFound
+        if user is None:
+            raise NoResultFound
         return user
