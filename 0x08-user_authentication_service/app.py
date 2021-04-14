@@ -50,9 +50,9 @@ def login():
             resp.set_cookie("session_id", SID)
             return resp
         else:
-            return abort(401)
+            abort(401)
     except Exception as e:
-        return abort(401)
+        abort(401)
 
 
 if __name__ == '__main__':
