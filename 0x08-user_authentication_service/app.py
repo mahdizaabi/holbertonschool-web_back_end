@@ -42,16 +42,13 @@ def login():
     password = request.form.get('password')
     if email is None or password is None:
         return None
-    try:
-        if AUTH.valid_login(email, password):
-            SID = AUTH.create_session(email)
-            resp = make_response(
-                jsonify({"email": email, "message": "logged in"}), 200)
-            resp.set_cookie("session_id", SID)
-            return resp
-        else:
-            abort(401)
-    except Exception as e:
+    if AUTH.valid_login(email, password):
+        SID = AUTH.create_session(email)
+        resp = make_response(
+            jsonify({"email": email, "message": "logged in"}), 200)
+        resp.set_cookie("session_id", SID)
+        return resp
+    else:
         abort(401)
 
 
