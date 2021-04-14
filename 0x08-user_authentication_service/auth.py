@@ -108,5 +108,5 @@ class Auth:
             else:
                 return None
 
-        except Exception as e:
+        except NoResultFound:
             return None
