@@ -7,6 +7,14 @@ holbertonschool-web_back_end
 import unittest
 from utils import access_nested_map
 from parameterized import parameterized
+from typing import (
+    Mapping,
+    Sequence,
+    Any,
+    Dict,
+    Callable,
+)
+
 
 class TestAccessNestedMap(unittest.TestCase):
     """[TestAccessNestedMap]
@@ -20,11 +28,11 @@ class TestAccessNestedMap(unittest.TestCase):
         ("map2", {"a": {"b": 2}}, ("a",), {"b": 2}),
         ("map3", {"a": {"b": 2}}, ("a", "b"), 2)
     ])
-    def test_access_nested_map(self, name, nested_map, path, expected):
+    def test_access_nested_map(self, name: str, nested_map: Mapping, path: Sequence, expected: Any) -> Any:
         """[summary]
 
         Args:
-            name ([type]): [description]
+            name ([str]): [description]
             nested_map ([type]): [description]
             path ([type]): [description]
         """
