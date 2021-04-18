@@ -24,11 +24,11 @@ class TestAccessNestedMap(unittest.TestCase):
     """
 
     @parameterized.expand([
-        ("map1", {"a": 1}, ("a",), 1),
-        ("map2", {"a": {"b": 2}}, ("a",), {"b": 2}),
-        ("map3", {"a": {"b": 2}}, ("a", "b"), 2)
+        ({"a": 1}, ("a",), 1),
+        ({"a": {"b": 2}}, ("a",), {"b": 2}),
+        ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
-    def test_access_nested_map(self, name: str, nested_map: Mapping,
+    def test_access_nested_map(self, nested_map: Mapping,
                                path: Sequence, expected: Any) -> bool:
         """[summary]
 
