@@ -22,17 +22,17 @@ from client import GitHubOrgClient
 
 
 class TestGitHubOrgClient(unittest.TestCase):
-    """[TestGitHubOrgClfd fd dfdsf s fsdsdf d fsient]
+    """[TestGitHubOrgClient]
 
     Args:
         unittest ([unittest Class]): [Unit test Base class]
     """
+
     @parameterized.expand([('google'), ('abc')])
     @patch('client.get_json')
     def test_org(self, org, mock_requests):
-        """[testing the GitHubOrgClient.orgjkhjj gh jg jhg  module]
+        """[testing the GitHubOrgClient.org module]
         """
         instance = GitHubOrgClient(org)
         instance.org()
-        mock_requests.assert_called_once_with(
-            f'https://api.github.com/orgs/{org}')
+        mock_requests.assert_called_once_with(f'https://api.github.com/orgs/{org}')
