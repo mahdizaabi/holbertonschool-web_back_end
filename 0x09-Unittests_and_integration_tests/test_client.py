@@ -22,7 +22,7 @@ from client import GitHubOrgClient
 
 
 class TestGitHubOrgClient(unittest.TestCase):
-    """[TestGitHubOrgClient]
+    """[TestGitHubOrgClfd fd dfdsf s fsdsdf d fsient]
 
     Args:
         unittest ([unittest Class]): [Unit test Base class]
@@ -30,7 +30,7 @@ class TestGitHubOrgClient(unittest.TestCase):
     @parameterized.expand([('google'), ('abc')])
     @patch('client.get_json')
     def test_org(self, org, mock_requests):
-        """[testing the GitHubOrgClient.org module]
+        """[testing the GitHubOrgClient.orgjkhjj gh jg jhg  module]
         """
         instance = GitHubOrgClient(org)
         instance.org()
