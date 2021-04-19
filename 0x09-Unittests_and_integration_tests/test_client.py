@@ -27,7 +27,6 @@ class TestGitHubOrgClient(unittest.TestCase):
     Args:
         unittest ([unittest Class]): [Unit test Base class]
     """
-
     @parameterized.expand([('google'), ('abc')])
     @patch('client.get_json')
     def test_org(self, org, mock_requests):
