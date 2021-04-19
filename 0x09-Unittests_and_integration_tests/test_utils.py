@@ -94,11 +94,23 @@ class TestGetJson(unittest.TestCase):
             """[summary]
             """
             class TestClass:
+                """[summary]
+                """
                 def a_method(self):
+                    """[summary]
+
+                    Returns:
+                        [type]: [description]
+                    """
                     return 42
 
                 @memoize
                 def a_property(self):
+                    """[summary]
+
+                    Returns:
+                        [type]: [description]
+                    """
                     return self.a_method()
 
                 with patch('TestClass.a_method',
