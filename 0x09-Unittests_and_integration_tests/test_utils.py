@@ -5,7 +5,7 @@ access_nested_map Test Module
 holbertonschool-web_back_end
 """
 import unittest
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 from typing import (
     Mapping,
@@ -83,37 +83,32 @@ class TestGetJson(unittest.TestCase):
             self.assertEqual(get_json(url), expected)
             assert mock_requests.get.call_count == 1
 
-    class TestMemoize(unittest.TestCase):
-        """[summary]
 
-        Args:
-            unittest ([type]): [description]
-        """
+class TestMemoize(unittest.TestCase):
+    """[summary]
+    Args:
+    unittest ([type]): [description]
+    """
 
-        def test_memoize(self):
-            """[summary]
-            """
-            class TestClass:
-                """[summary]
-                """
+    def test_memoize(self):
+        """[summary]"""
+        class TestClass:
+            """[summary]"""
 
-                def a_method(self):
-                    """[summary]
+            def a_method(self):
+                """[summary]"""
+                return 42
 
-                    Returns:
-                        [type]: [description]
-                    """
-                    return 42
-
-                @memoize
-                def a_property(self):
-                    """[summary]"""
-                    return self.a_method()
+            @memoize
+            def a_property(self):
+                """[summary]"""
+                return self.a_method()
+                myCLass = TestClass()
 
                 with patch('TestClass.a_method',
                            new_callable=PropertyMock) as mock_method:
-                    mock_method.return_value = 42
-                    myCLass = TestClass()
-                    self.assertEqual(myClass.a_method, mock_method.return_value)
-                    self.assertEqual(myClass.a_method, mock_method.return_value)
-                    mock_method.assert_called_once()
+                    mock_method.return_value = 48
+
+                    self.assertEqual(myClass.a_method, 42)
+                    self.assertEqual(myClass.a_method, 42)
+                    mock_method.assert_called_once('rrrr')
