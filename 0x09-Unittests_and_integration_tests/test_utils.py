@@ -119,5 +119,4 @@ class TestGetJson(unittest.TestCase):
                     myCLass = TestClass()
                     self.assertEqual(myClass.a_method, 42)
                     self.assertEqual(myClass.a_method, 42)
-                    myClass.a_method
                     mock_method.assert_called_once()
