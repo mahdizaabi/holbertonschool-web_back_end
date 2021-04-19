@@ -5,7 +5,6 @@ test_client.py
 holbertonschool-web_back_end
 """
 import unittest
-from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 from typing import (
     Mapping,
@@ -16,7 +15,7 @@ from typing import (
 )
 
 from unittest.mock import patch
-from unittest.mock import Mock, PropertyMock, MagicMock
+from unittest.mock import Mock, PropertyMock
 from fixtures import TEST_PAYLOAD
 from client import GitHubOrgClient
 
