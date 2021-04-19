@@ -37,7 +37,7 @@ class TestGitHubOrgClient(unittest.TestCase):
 
         with patch('client.get_json') as mock_requests:
             instance = GitHubOrgClient(org)
-            mock_requests.side_effect = Exception('ok')
+            mock_requests.side_effect = Exception()
             try:
                 instance.org
             except Exception as e:
