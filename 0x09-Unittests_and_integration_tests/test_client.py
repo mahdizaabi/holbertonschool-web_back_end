@@ -1,38 +1,24 @@
 #!/usr/bin/env python3
-"""
-test_client.py
-0x09. Unittests and Integration Tests
-holbertonschool-web_back_end
-"""
-import unittest
-from utils import access_nested_map, get_json, memoize
-from parameterized import parameterized
-from typing import (
-    Mapping,
-    Sequence,
-    Any,
-    Dict,
-    Callable,
-)
+""" Module for testing client """
 
-from unittest.mock import patch
-from unittest.mock import Mock, PropertyMock, MagicMock
+from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
-from client import GitHubOrgClient
+from parameterized import parameterized, parameterized_class
+import json
+import unittest
+from unittest.mock import patch, PropertyMock, Mock
 
 
-class TestGitHubOrgClient(unittest.TestCase):
-    """[TestGitHubOrgClient]
+class TestGithubOrgClient(unittest.TestCase):
+    """ Class for Testing Github Org Client """
 
-    Args:
-        unittest ([unittest Class]): [Unit test Base class]
-    """
-
-    @parameterized.expand([('google'), ('abc')])
+    @parameterized.expand([
+        ('google'),
+        ('abc')
+    ])
     @patch('client.get_json')
-    def test_org(self, org, mock_requests):
-        """[testing the GitHubOrgClient.org module]
-        """
-        instance = GitHubOrgClient(org)
-        instance.org()
-        mock_requests.assert_called_once_with(f'https://api.github.com/orgs/{org}')
+    def test_org(self, input, mock):
+        """Test that GithubOrgClient.org returns the correct value"""
+        test_class = GithubOrgClient(input)
+        test_class.org()
+        mock.assert_called_once_with(f'https://api.github.com/orgs/{input}')
