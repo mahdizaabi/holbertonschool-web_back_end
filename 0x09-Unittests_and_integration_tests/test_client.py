@@ -36,10 +36,3 @@ class TestGitHubOrgClient(unittest.TestCase):
         instance = GitHubOrgClient(org)
         instance.org()
         mock_requests.assert_called_once_with(f'https://api.github.com/orgs/{org}')
-        mock_requests.side_effect = Exception()
-        try:
-            instance.org()
-        except Exception as e:
-            mock_requests.assert_called_once_with(
-                "https://api.github.com/orgs/{}".format(org))
-            pass
