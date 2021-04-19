@@ -37,11 +37,11 @@ class TestGitHubOrgClient(unittest.TestCase):
         mock_requests.assert_called_once_with(
             f'https://api.github.com/orgs/{org}')
 
-    @parameterized.expand([('google', TEST_PAYLOAD[0][0]), ('abc', {})])
-    def test_public_repos_url(self, expected):
+    @parameterized.expand([('google', TEST_PAYLOAD[0][0])])
+    def test_public_repos_url(self, org, expected):
         """[testing the public methode]
         """
-        with patch('client.org') as mock_requests:
+        with patch('client.GitHubOrgClient') as mock_requests:
             instance = GitHubOrgClient(org)
-            mock_requests.return_value = expected
-            self.assertEqual(instance._public_repos_url, expected)
+            mock_requests.org.return_value = expected
+            self.assertEqual(instance._public_repos_url, expected['repos_url'])
