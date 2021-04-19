@@ -117,6 +117,7 @@ class TestGetJson(unittest.TestCase):
                            new_callable=PropertyMock) as mock_method:
                     mock_method.return_value = 42
                     myCLass = TestClass()
-                    myClass.a_method
+                    self.assertEqual(myClass.a_method, 42)
+                    self.assertEqual(myClass.a_method, 42)
                     myClass.a_method
                     mock_method.assert_called_once()
