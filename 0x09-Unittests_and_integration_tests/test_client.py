@@ -28,7 +28,7 @@ class TestGitHubOrgClient(unittest.TestCase):
         unittest ([unittest Class]): [Unit test Base class]
     """
 
-    @parameterized.expand([('google', TEST_PAYLOAD), ('abc', {})])
+    @parameterized.expand([('google', TEST_PAYLOAD)])
     def test_org(self, org, expected):
         """[testing the GitHubOrgClient.org module]
         """
