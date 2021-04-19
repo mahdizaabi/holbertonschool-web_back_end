@@ -119,4 +119,4 @@ class TestGetJson(unittest.TestCase):
                     myCLass = TestClass()
                     myClass.a_method
                     myClass.a_method
-                    mock_method.assert_called_once_with()
+                    mock_method.assert_called_once()
