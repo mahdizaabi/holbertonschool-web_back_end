@@ -21,11 +21,7 @@ from client import GitHubOrgClient
 
 
 class TestGitHubOrgClient(unittest.TestCase):
-    """[TestGitHubOrgClient]
-
-    Args:
-        unittest ([unittest Class]): [Unit test Base class]
-    """
+    """ Class for Testing Github Org Client ClientC Client lient """
 
     @parameterized.expand([('google'), ('abc')])
     @patch('client.get_json')
@@ -39,7 +35,7 @@ class TestGitHubOrgClient(unittest.TestCase):
 
     @parameterized.expand([('google', TEST_PAYLOAD[0][0])])
     def test_public_repos_url(self, org, expected):
-        """[testing the public methode]
+        """[testing the public methode the public Client Clientmethode]
         """
         with patch('client.GitHubOrgClient') as mock_requests:
             instance = GitHubOrgClient(org)
