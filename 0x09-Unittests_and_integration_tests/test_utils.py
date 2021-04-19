@@ -16,7 +16,7 @@ from typing import (
 )
 
 from unittest.mock import patch
-from unittest.mock import Mock, PropertyMock
+from unittest.mock import Mock, PropertyMock, MagicMock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -103,12 +103,9 @@ class TestMemoize(unittest.TestCase):
             def a_property(self):
                 """[summary]"""
                 return self.a_method()
-                myCLass = TestClass()
 
-                with patch('TestClass.a_method',
-                           new_callable=PropertyMock) as mock_method:
-                    mock_method.return_value = 48
-
-                    self.assertEqual(myClass.a_method, 42)
-                    self.assertEqual(myClass.a_method, 42)
-                    mock_method.assert_called_once('rrrr')
+        c = TestClass()
+        c.a_method = MagicMock(return_value=42)
+        self.assertEqual(c.a_property, 42)
+        self.assertEqual(c.a_property, 42)
+        c.a_method.assert_called_once()
