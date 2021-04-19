@@ -28,23 +28,14 @@ class TestGitHubOrgClient(unittest.TestCase):
         unittest ([unittest Class]): [Unit test Base class]
     """
 
-    @parameterized.expand([
-        ('google'),
-        ('abc')
-    ])
-    @patch('client.get_json')
-    def test_org(self, input, mock):
-        """Test that GithubOrgClient.org returns the correct value"""
-        test_class = GithubOrgClient(input)
-        test_class.org()
-        mock.assert_called_once_with(f'https://api.github.com/orgs/{input}')
-
     @parameterized.expand([('google'), ('abc')])
     @patch('client.get_json')
     def test_org(self, org, mock_requests):
         """[testing the GitHubOrgClient.org module]
         """
         instance = GitHubOrgClient(org)
+        instance.org()
+        mock_requests.assert_called_once_with(f'https://api.github.com/orgs/{org}')
         mock_requests.side_effect = Exception()
         try:
             instance.org()
