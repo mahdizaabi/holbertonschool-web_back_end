@@ -96,6 +96,7 @@ class TestGetJson(unittest.TestCase):
             class TestClass:
                 """[summary]
                 """
+
                 def a_method(self):
                     """[summary]
 
@@ -106,17 +107,13 @@ class TestGetJson(unittest.TestCase):
 
                 @memoize
                 def a_property(self):
-                    """[summary]
-
-                    Returns:
-                        [type]: [description]
-                    """
+                    """[summary]"""
                     return self.a_method()
 
                 with patch('TestClass.a_method',
                            new_callable=PropertyMock) as mock_method:
                     mock_method.return_value = 42
                     myCLass = TestClass()
-                    self.assertEqual(myClass.a_method, 42)
-                    self.assertEqual(myClass.a_method, 42)
+                    self.assertEqual(myClass.a_method, mock_method.return_value)
+                    self.assertEqual(myClass.a_method, mock_method.return_value)
                     mock_method.assert_called_once()
