@@ -18,7 +18,7 @@ from typing import (
 from unittest.mock import patch
 from unittest.mock import Mock, PropertyMock, MagicMock
 from fixtures import TEST_PAYLOAD
-from test_client import GitHubOrgClient
+from client import GitHubOrgClient
 
 
 class TestGitHubOrgClient(unittest.TestCase):
@@ -28,6 +28,17 @@ class TestGitHubOrgClient(unittest.TestCase):
         unittest ([unittest Class]): [Unit test Base class]
     """
 
-    def test_org(cls):
+    @parameterized.expand([('google', TEST_PAYLOAD), ('abc', {})])
+    def test_org(self, org, expected):
         """[testing the GitHubOrgClient.org module]
         """
+
+        instance = GitHubOrgClient(org)
+
+        with patch('client.get_json') as mock_requests:
+            instance = GitHubOrgClient(org)
+            mock_requests.return_value = expected
+            self.assertEqual(instance.org, expected)
+            self.assertEqual(instance.org, expected)
+            mock_requests.assert_called_once_with(
+                'https://api.github.com/orgs/google')
