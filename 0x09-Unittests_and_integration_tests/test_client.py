@@ -37,8 +37,10 @@ class TestGitHubOrgClient(unittest.TestCase):
 
         with patch('client.get_json') as mock_requests:
             instance = GitHubOrgClient(org)
-            mock_requests.return_value = expected
-            self.assertEqual(instance.org, expected)
-            self.assertEqual(instance.org, expected)
-            mock_requests.assert_called_once_with(
-                "https://api.github.com/orgs/{}".format(org))
+            mock_requests.side_effect = Exception('ok')
+            try:
+                instance.org
+            except Exception as e:
+                mock_requests.assert_called_once_with(
+                    "https://api.github.com/orgs/{}".format(org))
+                pass
