@@ -29,18 +29,15 @@ class TestGitHubOrgClient(unittest.TestCase):
     """
 
     @parameterized.expand([('google', TEST_PAYLOAD[0][1][0]), ('abc', {})])
-    def test_org(self, org, expected):
+    @patch('client.get_json')
+    def test_org(self, org, expected, mock_requests):
         """[testing the GitHubOrgClient.org module]
         """
-
         instance = GitHubOrgClient(org)
-
-        with patch('client.get_json') as mock_requests:
-            instance = GitHubOrgClient(org)
-            mock_requests.side_effect = Exception()
-            try:
-                instance.org
-            except Exception as e:
-                mock_requests.assert_called_once_with(
-                    "https://api.github.com/orgs/{}".format(org))
-                pass
+        mock_requests.side_effect = Exception()
+        try:
+            instance.org
+        except Exception as e:
+            mock_requests.assert_called_once_with(
+                "https://api.github.com/orgs/{}".format(org))
+            pass
