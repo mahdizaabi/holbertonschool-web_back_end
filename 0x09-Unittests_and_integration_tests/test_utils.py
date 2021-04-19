@@ -81,3 +81,4 @@ class TestGetJson(unittest.TestCase):
         with patch('utils.requests') as mock_requests:
             mock_requests.get.return_value = self.response(payload)
             self.assertEqual(get_json(url), expected)
+            assert mock_requests.get.call_count == 1
