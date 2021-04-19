@@ -28,7 +28,7 @@ class TestGitHubOrgClient(unittest.TestCase):
         unittest ([unittest Class]): [Unit test Base class]
     """
 
-    @parameterized.expand([('google', TEST_PAYLOAD)])
+    @parameterized.expand([('google', TEST_PAYLOAD[0][1][0]), ('abc', {})])
     def test_org(self, org, expected):
         """[testing the GitHubOrgClient.org module]
         """
@@ -41,4 +41,4 @@ class TestGitHubOrgClient(unittest.TestCase):
             self.assertEqual(instance.org, expected)
             self.assertEqual(instance.org, expected)
             mock_requests.assert_called_once_with(
-                'https://api.github.com/orgs/google')
+                "https://api.github.com/orgs/{}".format(org))
