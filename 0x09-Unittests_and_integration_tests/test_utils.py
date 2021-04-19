@@ -16,7 +16,7 @@ from typing import (
 )
 
 from unittest.mock import patch
-from unittest.mock import Mock
+from unittest.mock import Mock, PropertyMock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -82,3 +82,29 @@ class TestGetJson(unittest.TestCase):
             mock_requests.get.return_value = self.response(payload)
             self.assertEqual(get_json(url), expected)
             assert mock_requests.get.call_count == 1
+
+    class TestMemoize(unittest.TestCase):
+        """[summary]
+
+        Args:
+            unittest ([type]): [description]
+        """
+
+        def test_memoize(self):
+            """[summary]
+            """
+            class TestClass:
+                def a_method(self):
+                    return 42
+
+                @memoize
+                def a_property(self):
+                    return self.a_method()
+
+                with patch('TestClass.a_method',
+                           new_callable=PropertyMock) as mock_method:
+                    mock_method.return_value = 42
+                    myCLass = TestClass()
+                    myClass.a_method
+                    myClass.a_method
+                    mock_method.assert_called_once_with()
