@@ -93,8 +93,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         test_class = GithubOrgClient('do')
         self.assertEqual(test_class.org, self.org_payload)
-        self.assertEqual(test_class._public_repos_url,
-                         self.org_payload["repos_url"])
         self.assertEqual(test_class.repos_payload, self.repos_payload)
         self.assertEqual(test_class.public_repos(), self.expected_repos)
         self.assertEqual(test_class.public_repos("sdsd"), [])
@@ -104,7 +102,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """[Implement test_public_repos_with_license to test the public_repos with the argument license="apache-2.0"
             and make sure the result matches the expected value from the fixtures.]
         """
-        test_class = GithubOrgClient("google")
+        test_class = GithubOrgClient("do")
         self.assertEqual(test_class.public_repos(), self.expected_repos)
         self.assertEqual(test_class.public_repos("nolicence"), [])
         self.assertEqual(test_class.public_repos(
