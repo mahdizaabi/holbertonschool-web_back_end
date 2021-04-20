@@ -38,17 +38,23 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(instance._public_repos_url, expected["repos_url"])
 
     @patch('client.get_json')
-    def test_public_repos(self, jsmock):
+    def test_public_repos(self, mock_json):
         """[test the result of fetching all PUBLIC Repository containing
             specific licence, or None otherwise]
         """
 
-        jsmock.return_value = [{'name': 'repo'}]
-        with patch('client.GithubOrgClient._public_repos_url', new_callable=PropertyMock) as propertyMock:
-            propertyMock.return_value = 'return from property'
-            instance = GithubOrgClient('fakeUrl')
-            expected = ['repo']
-            result = instance.public_repos()
-            self.assertEqual(result, expected)
-            propertyMock.assert_called_once()
-            jsmock.assert_called_once()
+        Response_payload = [{"name": "Google"}]
+        mock_json.return_value = Response_payload
+
+        with patch('client.GithubOrgClient._public_repos_url',
+                   new_callable=PropertyMock) as mock_public:
+
+            mock_public.return_value = "hello/world"
+            test_class = GithubOrgClient('test')
+            result = test_class.public_repos()
+
+            check = [rep["name"] for rep in Response_payload]
+            self.assertEqual(result, check)
+
+            mock_public.assert_called_once()
+            mock_json.assert_called_once()
