@@ -36,3 +36,17 @@ class TestGithubOrgClient(unittest.TestCase):
             instance = GithubOrgClient(org)
             mock.org.return_value = expected
             self.assertEqual(instance._public_repos_url, expected["repos_url"])
+
+    @patch('client.GithubOrgClient')
+    @patch('client.get_json')
+    def test_public_repos(self, prmock, jsmock):
+        """[test the result of fetching all PUBLIC Repository]
+        """
+
+        prmock._public_repos_url.return_value = "fake_url"
+        jsmock.return_value = [{'name': 'mahdi'}]
+        instance = GithubOrgClient('fakeUrl')
+        expected = [{'name': 'fake'}]
+        result = instance.public_repos()
+
+        self.assertEqual(result, expected)
