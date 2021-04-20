@@ -86,12 +86,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             cls.org_payload, cls.repos_payload,
         ]
 
-    @classmethod
-    def tearDownClass(cls):
-        """the unittest.TestCase API
-        mexample payloads found example payloads found  """
-        cls.get_patcher.stop()
-
     def test_public_repos(self):
         """[implement the test_public_repos method to test
         GithubOrgClient.public_repos.]
@@ -114,3 +108,9 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.assertEqual(test_class.public_repos(
             "apache-2.0"), self.apache2_repos)
         self.mock.assert_called()
+
+    @classmethod
+    def tearDownClass(cls):
+        """the unittest.TestCase API
+        mexample payloads found example payloads found  """
+        cls.get_patcher.stop()
