@@ -90,3 +90,12 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """the unittest.TestCase API
         mexample payloads found example payloads found  """
         cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        """[implement the test_public_repos method to test 
+        GithubOrgClient.public_repos.]
+        """
+
+        instance = GithubOrgClient('do')
+        instance.public_repos()
+        self.assertEqual(instance.public_repos(), TEST_PAYLOAD[0][2])
