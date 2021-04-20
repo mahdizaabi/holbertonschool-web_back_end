@@ -48,7 +48,5 @@ class TestGithubOrgClient(unittest.TestCase):
             instance = GithubOrgClient('fakeUrl')
             expected = ['repo']
             result = instance.public_repos()
-
-            self.assertEqual(result, expected)
             propertyMock.assert_called_once()
             jsmock.assert_called_once()
