@@ -109,6 +109,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             and make sure the result matches the expected value from the fixtures.]
         """
         test_class = GithubOrgClient("google")
+        self.assertEqual(test_class.public_repos(), self.expected_repos)
+        self.assertEqual(test_class.public_repos("nolicence"), [])
         self.assertEqual(test_class.public_repos(
             "apache-2.0"), self.apache2_repos)
         self.mock.assert_called()
