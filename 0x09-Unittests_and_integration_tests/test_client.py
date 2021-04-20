@@ -97,6 +97,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
                          self.org_payload["repos_url"])
         self.assertEqual(test_class.repos_payload, self.repos_payload)
         self.assertEqual(test_class.public_repos(), self.expected_repos)
+        self.assertEqual(test_class.public_repos("sdsd"), [])
         self.mock.assert_called()
 
     def test_public_repos_with_license(self):
