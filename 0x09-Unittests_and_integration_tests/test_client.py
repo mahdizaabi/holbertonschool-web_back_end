@@ -81,7 +81,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """[summary]
         """
         cls.get_patcher = patch('requests.get')
-        cls.mock = cls.mock_get_patcher.start()
+        cls.mock = cls.get_patcher.start()
 
         cls.mock.return_value.json.side_effect = [
             cls.org_payload, cls.repos_payload]
