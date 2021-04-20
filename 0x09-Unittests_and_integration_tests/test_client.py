@@ -74,11 +74,10 @@ class TestGithubOrgClient(unittest.TestCase):
     TEST_PAYLOAD
 )
 class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """ Class for Integration test of fixtures """
-
+    """ example payloads found example payloads found  """
     @classmethod
     def setUpClass(cls):
-        """  unittest.TestCase API
+        """  unittest.TestCase
         method to return example payloads found in the fixtures """
         config = {'return_value.json.side_effect':
                   [
@@ -90,7 +89,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock = cls.get_patcher.start()
 
     @classmethod
-    def teardown_class(cls):
-        """[Integration test of fixtures]
-        """
+    def tearDownClass(cls):
+        """the unittest.TestCase API
+        mexample payloads found example payloads found  """
         cls.get_patcher.stop()
