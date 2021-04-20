@@ -93,6 +93,10 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         test_class = GithubOrgClient("google")
 
         self.assertEqual(test_class.org, self.org_payload)
+        self.assertEqual(test_class.repos_payload, self.repos_payload)
+        self.assertEqual(test_class.public_repos(), self.expected_repos)
+        self.assertEqual(test_class.public_repos("XLICENSE"), [])
+        self.mock.assert_called()
 
     @classmethod
     def tearDownClass(cls):
