@@ -79,14 +79,12 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     def setUpClass(cls):
         """  unittest.TestCase
         method to return example payloads found in the fixtures """
-        config = {'return_value.json.side_effect':
-                  [
-                      cls.org_payload, cls.repos_payload,
-                      cls.org_payload, cls.repos_payload
-                  ]
-                  }
-        cls.get_patcher = patch('requests.get', **config)
+        cls.get_patcher = patch('requests.get')
         cls.mock = cls.get_patcher.start()
+        cls.mock.return_value.json.side_effect = [
+            cls.org_payload, cls.repos_payload,
+            cls.org_payload, cls.repos_payload
+        ]
 
     @classmethod
     def tearDownClass(cls):
