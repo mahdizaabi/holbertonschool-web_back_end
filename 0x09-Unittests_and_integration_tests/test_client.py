@@ -83,7 +83,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher = patch('requests.get')
         cls.mock = cls.mock_get_patcher.start()
 
-        cls.mock.side_effetc = [cls.org_payload, cls.repos_payload]
+        cls.mock.side_effect = [cls.org_payload, cls.repos_payload]
 
     @classmethod
     def teardown_class(cls):
