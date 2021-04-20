@@ -83,6 +83,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock = cls.get_patcher.start()
         cls.mock.return_value.json.side_effect = [
             cls.org_payload, cls.repos_payload,
+            cls.org_payload, cls.repos_payload,
         ]
 
     @classmethod
@@ -92,10 +93,22 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.get_patcher.stop()
 
     def test_public_repos(self):
-        """[implement the test_public_repos method to test 
+        """[implement the test_public_repos method to test
         GithubOrgClient.public_repos.]
         """
 
-        instance = GithubOrgClient('do')
-        instance.public_repos()
-        self.assertEqual(instance.public_repos(), TEST_PAYLOAD[0][2])
+        test_class = GithubOrgClient('do')
+        self.assertEqual(test_class.org, self.org_payload)
+        self.assertEqual(test_class._public_repos_url,
+                         self.org_payload["repos_url"])
+        self.assertEqual(test_class.repos_payload, self.repos_payload)
+        self.assertEqual(test_class.public_repos(), self.expected_repos)
+
+    def test_public_repos_with_license(self):
+        """[Implement test_public_repos_with_license to test the public_repos with the argument license="apache-2.0"
+            and make sure the result matches the expected value from the fixtures.]
+        """
+        test_class = GithubOrgClient("google")
+        self.assertEqual(test_class.public_repos(
+            "apache-2.0"), self.apache2_repos)
+        self.mock.assert_called()
