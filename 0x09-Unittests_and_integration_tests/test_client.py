@@ -67,3 +67,24 @@ class TestGithubOrgClient(unittest.TestCase):
 
         self.assertEqual(GithubOrgClient.has_license(
             mapping, license_key), excepted)
+
+
+@parameterized_class(
+    ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
+    TEST_PAYLOAD
+)
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """ Class for Integration test of fixtures """
+
+    @classmethod
+    def setUpClass(cls):
+        """[summary]
+        """
+        cls.get_patcher = patch('requests.get')
+        cls.mock = cls.mock_get_patcher.start()
+
+    @classmethod
+    def teardown_class(cls):
+        """[summary]
+        """
+        cls.get_patcher.stop()
