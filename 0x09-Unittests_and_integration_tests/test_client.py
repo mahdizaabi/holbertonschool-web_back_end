@@ -58,15 +58,18 @@ class TestGithubOrgClient(unittest.TestCase):
 
             mock_public.assert_called_once()
             mock_json.assert_called_once()
+    p = [({"license": {"key": "my_license"}}, "my_license", True),
+         ({"license": {"key": "other_license"}}, "my_license", False)]
 
-    @parameterized.expand([({"license": {"key": "my_license"}}, "my_license", True),
-                           ({"license": {"key": "other_license"}}, "my_license", False)])
+    @parameterized.expand(p)
     def test_has_license(self, mapping, license_key, excepted):
         """[test test_has_license]
         """
 
         self.assertEqual(GithubOrgClient.has_license(
             mapping, license_key), excepted)
+
+
 @parameterized_class(
     ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
     TEST_PAYLOAD
@@ -81,31 +84,32 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock = cls.get_patcher.start()
         cls.mock.return_value.json.side_effect = [
             cls.org_payload, cls.repos_payload,
-            cls.org_payload, cls.repos_payload,]
+            cls.org_payload, cls.repos_payload,
+        ]
 
     def test_public_repos(self):
         """[implement the test_public_repos method to test
         GithubOrgClient.public_repos.]
         """
 
-        instance = GithubOrgClient('do') 
-        # self.assertEqual(instance.org, self.org_payload)
-        # self.assertAlmostEqual(instance._public_repos_url,
-                               #'https://api.github.com/orgs/google/repos')
-        #self.assertEqual(instance.repos_payload, self.repos_payload)
+        instance = GithubOrgClient('do')
+        self.assertEqual(instance.org, self.org_payload)
+        self.assertAlmostEqual(instance._public_repos_url,
+                               'https://api.github.com/orgs/google/repos')
+        self.assertEqual(instance.repos_payload, self.repos_payload)
         self.assertEqual(instance.public_repos(), self.expected_repos)
         self.assertEqual(instance.public_repos("sdsd"), [])
         self.mock.assert_called()
 
     def test_public_repos_with_license(self):
-        """[Implement test_public_repos_with_license to test the public_repos with the argument license="apache-2.0"
-            and make sure the result matches the expected value from the fixtures.]
+        """[Implement test_public_repos_with_liceargument license="apache-2.0"
+            and make sure the expected value from the fixtures.]
         """
         instance = GithubOrgClient("do")
-        #self.assertEqual(instance.org, self.org_payload)
-        #self.assertAlmostEqual(instance._public_repos_url,
-                               #'https://api.github.com/orgs/google/repos')
-        #self.assertEqual(instance.repos_payload, self.repos_payload)
+        self.assertEqual(instance.org, self.org_payload)
+        self.assertAlmostEqual(instance._public_repos_url,
+                               'https://api.github.com/orgs/google/repos')
+        self.assertEqual(instance.repos_payload, self.repos_payload)
         self.assertEqual(instance.public_repos(), self.expected_repos)
         self.assertEqual(instance.public_repos("nolicence"), [])
         self.assertEqual(instance.public_repos(
