@@ -93,6 +93,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
         instance = GithubOrgClient('do')
         self.assertEqual(instance.org, self.org_payload)
+        self.assertAlmostEqual(instance._public_repos_url,
+                               'https://api.github.com/orgs/google/repos')
         self.assertEqual(instance.repos_payload, self.repos_payload)
         self.assertEqual(instance.public_repos(), self.expected_repos)
         self.assertEqual(instance.public_repos("sdsd"), [])
