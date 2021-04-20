@@ -39,7 +39,8 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch('client.get_json')
     def test_public_repos(self, jsmock):
-        """[test the result of fetching all PUBLIC Repository]
+        """[test the result of fetching all PUBLIC Repository containing
+            specific licence, or None otherwise]
         """
         with patch('client.GithubOrgClient._public_repos_url', new_callable=PropertyMock) as propertyMock:
             propertyMock.return_value = 'return from property'
