@@ -34,12 +34,13 @@ class GithubOrgClient:
 
     @memoize
     def repos_payload(self) -> Dict:
-        """Fetch ALL Public REPOSITORY and memoize the 
+        """Fetch ALL Public REPOSITORY and memoize the
             response"""
         return get_json(self._public_repos_url)
 
     def public_repos(self, license: str = None) -> List[str]:
-        """return Public repos if it has a SPECIFIC licence or licence is None"""
+        """return Public repos if it has a
+            SPECIFIC licence or licence is None"""
         json_payload = self.repos_payload
         public_repos = [
             repo["name"] for repo in json_payload
