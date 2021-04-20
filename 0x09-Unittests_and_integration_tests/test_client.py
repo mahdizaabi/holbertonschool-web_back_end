@@ -37,16 +37,17 @@ class TestGithubOrgClient(unittest.TestCase):
             mock.org.return_value = expected
             self.assertEqual(instance._public_repos_url, expected["repos_url"])
 
-    @patch('client.GithubOrgClient')
     @patch('client.get_json')
-    def test_public_repos(self, prmock, jsmock):
+    def test_public_repos(self, jsmock):
         """[test the result of fetching all PUBLIC Repository]
         """
+        with patch('client.GithubOrgClient._public_repos_url', new_callable=PropertyMock) as propertyMock:
+            propertyMock.return_value = 'return from property'
+            jsmock.return_value = [{'name': 'repo'}]
+            instance = GithubOrgClient('fakeUrl')
+            expected = ['repo']
+            result = instance.public_repos()
 
-        prmock._public_repos_url.return_value = "fake_url"
-        jsmock.return_value = [{'name': 'mahdi'}]
-        instance = GithubOrgClient('fakeUrl')
-        expected = [{'name': 'fake'}]
-        result = instance.public_repos()
-
-        self.assertEqual(result, expected)
+            self.assertEqual(result, expected)
+            propertyMock.assert_called_once()
+            jsmock.assert_called_once_with('return from property')
