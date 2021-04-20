@@ -40,7 +40,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_json):
         """[test the result of fetching all PUBLIC Repository containing
-            specific licence, or None otherwise]
+            specific licence]
         """
 
         Response_payload = [{"name": "Google"}]
@@ -58,3 +58,11 @@ class TestGithubOrgClient(unittest.TestCase):
 
             mock_public.assert_called_once()
             mock_json.assert_called_once()
+
+    @parameterized.expand([({"license": {"key": "my_license"}}, "my_license", True),
+                           ({"license": {"key": "other_license"}}, "my_license", False)])
+    def test_has_license(self, mapping, license_key, excepted):
+        """[test test_has_license]
+        """
+
+        self.assertEqual(GithubOrgClient.has_license(mapping, license_key), excepted)
