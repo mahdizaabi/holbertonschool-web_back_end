@@ -42,11 +42,13 @@ class TestGithubOrgClient(unittest.TestCase):
         """[test the result of fetching all PUBLIC Repository containing
             specific licence, or None otherwise]
         """
+
+        jsmock.return_value = [{'name': 'repo'}]
         with patch('client.GithubOrgClient._public_repos_url', new_callable=PropertyMock) as propertyMock:
             propertyMock.return_value = 'return from property'
-            jsmock.return_value = [{'name': 'repo'}]
             instance = GithubOrgClient('fakeUrl')
             expected = ['repo']
             result = instance.public_repos()
+            self.assertEqual(result, expected)
             propertyMock.assert_called_once()
             jsmock.assert_called_once()
