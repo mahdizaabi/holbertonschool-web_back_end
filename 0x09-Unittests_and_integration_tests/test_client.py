@@ -32,9 +32,9 @@ class TestGithubOrgClient(unittest.TestCase):
         """ Test that the result of _public_repos_url is the expected one
         based on the mocked payload
         """
-        with patch('client.GithubOrgClient') as mock:
+        with patch('client.get_json') as mock:
             instance = GithubOrgClient(org)
-            mock.org.return_value = expected
+            mock.return_value = expected
             self.assertEqual(instance._public_repos_url, expected["repos_url"])
 
     @patch('client.get_json')
@@ -67,37 +67,3 @@ class TestGithubOrgClient(unittest.TestCase):
 
         self.assertEqual(GithubOrgClient.has_license(
             mapping, license_key), excepted)
-
-
-@parameterized_class(
-    ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
-    TEST_PAYLOAD
-)
-class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """[integration test of GithubOrgClient.public_repos method]
-
-    Args:
-        unittest ([unittest]): [unittest]
-    """
-
-    @classmethod
-    def setUpClass(cls):
-
-        cls.patcher = patch("requests.get")
-        cls.mock = cls.patcher.start()
-        cls.mock.return_value.json.side_effect = [
-            cls.org_payload, cls.repos_payload]
-
-    def test_public_repos(self):
-        """ Integration test: public repos"""
-        test_class = GithubOrgClient("google")
-
-        self.assertEqual(test_class.org, self.org_payload)
-        self.assertEqual(test_class.repos_payload, self.repos_payload)
-        self.assertEqual(test_class.public_repos(), self.expected_repos)
-        self.assertEqual(test_class.public_repos("XLICENSE"), [])
-        self.mock.assert_called()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.patcher.stop()
