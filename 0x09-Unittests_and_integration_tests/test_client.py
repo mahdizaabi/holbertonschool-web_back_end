@@ -50,4 +50,4 @@ class TestGithubOrgClient(unittest.TestCase):
 
             self.assertEqual(result, expected)
             propertyMock.assert_called_once()
-            jsmock.assert_called_once_with('return from property')
+            jsmock.assert_called_once()
