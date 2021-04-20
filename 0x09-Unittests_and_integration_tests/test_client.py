@@ -67,8 +67,6 @@ class TestGithubOrgClient(unittest.TestCase):
 
         self.assertEqual(GithubOrgClient.has_license(
             mapping, license_key), excepted)
-
-
 @parameterized_class(
     ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
     TEST_PAYLOAD
@@ -83,15 +81,14 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock = cls.get_patcher.start()
         cls.mock.return_value.json.side_effect = [
             cls.org_payload, cls.repos_payload,
-            cls.org_payload, cls.repos_payload,
-        ]
+            cls.org_payload, cls.repos_payload,]
 
     def test_public_repos(self):
         """[implement the test_public_repos method to test
         GithubOrgClient.public_repos.]
         """
 
-        instance = GithubOrgClient('do')
+        instance = GithubOrgClient('do') 
         # self.assertEqual(instance.org, self.org_payload)
         # self.assertAlmostEqual(instance._public_repos_url,
                                #'https://api.github.com/orgs/google/repos')
