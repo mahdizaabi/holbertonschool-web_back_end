@@ -11,7 +11,7 @@ class Config(object):
     """ Configuration Class for Babel """
 
     LANGUAGES = ['en', 'fr']
-    BABEL_DEFAULT_LOCALE = 'fr'
+    BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
@@ -26,7 +26,18 @@ def hello_world() -> str:
 
 @babel.localeselector
 def get_locale() -> str:
-    """Select a language translation to use for that request"""
+    """[ Force locale with URL parameter]
+    """
+    locale = request.args.get('locale')
+    if locale:
+        return locale
+    if request.args.get('login_as'):
+        language = users.get(int(user).get('locale'))
+        if language in app.config['LANGUAGES']:
+            return language
+    headers = request.headers.get('locale')
+    if headers:
+        return headers
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
