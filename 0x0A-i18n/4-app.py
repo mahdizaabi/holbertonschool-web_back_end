@@ -18,6 +18,17 @@ class Config(object):
 app.config.from_object(Config)
 
 
+def get_user(id: int, login_as: str) -> dict:
+    """[summary]
+
+    Returns:
+        [type]: [description]
+    """
+    if not id or not login_as:
+        return None
+    return
+
+
 @app.route('/', methods=['GET'], strict_slashes=False)
 def hello_world() -> str:
     """Renders a Basic Template for Babel Implementation"""
