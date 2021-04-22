@@ -56,18 +56,10 @@ def hello_world() -> str:
 
 @babel.localeselector
 def get_locale() -> str:
-    """[ Force locale with URL parameter]
-    """
-    locale = request.args.get('locale')
-    if locale:
+    """Select a language translation to use for that request"""
+    locale = request.args.get("locale")
+    if locale and locale in app.config['LANGUAGES']:
         return locale
-    if request.args.get('login_as'):
-        language = users.get(int(user).get('locale'))
-        if language in app.config['LANGUAGES']:
-            return language
-    headers = request.headers.get('locale')
-    if headers:
-        return headers
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
