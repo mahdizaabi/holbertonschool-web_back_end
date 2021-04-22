@@ -3,7 +3,7 @@
 Route module for the API
 """
 from os import getenv
-from flask import Flask, render_template, Babel
+from flask_babel import Babel
 from flask_cors import (CORS, cross_origin)
 import os
 
