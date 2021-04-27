@@ -35,3 +35,33 @@ class Cache():
         id = Cache.generate_id()
         self._redis.mset({id: data})
         return id
+
+    def get(self, key, fn):
+        """[Get value from redis storage and decode it]
+        """
+
+        if fn is None:
+            return self._redis.get(key)
+        encodedValue = self._redis.get(key)
+        if encodedValue is None:
+            return None
+
+        return fn(encodedValue)
+
+    def get_str(self, value: bytes) -> str:
+        """[summary]
+
+        Args:
+            value ([type]): [description]
+        """
+
+        return value.decode("utf-8")
+
+    def get_int(self, value: bytes) -> str:
+        """[summary]
+
+        Args:
+            value ([type]): [description]
+        """
+
+        return int(value.decode("utf-8"))
