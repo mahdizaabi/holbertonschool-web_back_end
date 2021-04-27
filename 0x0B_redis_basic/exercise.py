@@ -36,7 +36,8 @@ class Cache():
         self._redis.mset({id: data})
         return id
 
-    def get(self, key, fn):
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """[Get value from redis storage and decode it]
         """
 
