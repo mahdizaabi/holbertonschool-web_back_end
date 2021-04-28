@@ -74,6 +74,7 @@ def replay(fn: Callable):
         out = str(out.decode("utf-8"))
         print("{}(*{},) -> {}".format(functionName, inp, out))
 
+
 class Cache():
     """[Caching base Class using redis]
     """
