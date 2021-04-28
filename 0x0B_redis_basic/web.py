@@ -21,13 +21,15 @@ def count_requests(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(url):
         """ Wrapper for the decorated function """
-        # track nombre of request made by the server to load html
-        r.incr("count:{}".format(url))
+
         # check if the cache has a copy of the page if yes,
         # return the page from cache, otherwise make a new request
         cached_html = r.get(f"cached_html:{url}")
         if cached_html:
             return cached_html.decode('utf-8')
+
+        # track nombre of request made by the server to load html
+        r.incr("count:{}".format(url))
 
         # make a new request
         html = method(url)
