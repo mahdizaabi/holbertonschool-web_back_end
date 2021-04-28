@@ -62,8 +62,9 @@ def replay(fn: Callable):
     outputListKey = functionName + ":outputs"
     # get the number of calls to the function:
     r = redis.Redis()
-    number_calls = r.get(functionName)
+    number_calls = str(r.get(functionName).decode('utf-8'))
     print("{} was called {} times:".format(functionName, number_calls))
+    
 
     # get list of inpus and ouputs:
     inputs = r.lrange(inputListKey, 0, -1)
