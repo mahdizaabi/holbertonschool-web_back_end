@@ -70,8 +70,14 @@ def replay(fn: Callable):
     outputs = r.lrange(outputListKey, 0, -1)
 
     for inp, out in zip(inputs, outputs):
-        inp = str(inp.decode("utf-8"))
-        out = str(out.decode("utf-8"))
+        try:
+            inp = str(inp.decode("utf-8"))
+        except Exception as e:
+            inp = ""
+        try:
+            out = str(out.decode("utf-8"))
+        except Exception as e:
+            out = ""
         print("{}(*{},) -> {}".format(functionName, inp, out))
 
 
