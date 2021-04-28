@@ -24,7 +24,7 @@ def count_requests(method: Callable) -> Callable:
 
         # check if the cache has a copy of the page if yes,
         # return the page from cache, otherwise make a new request
-        cached_html = r.get(f"cached_html:{url}")
+        cached_html = r.get("cached_html:{}".format(url))
         if cached_html:
             return cached_html.decode('utf-8')
 
@@ -34,7 +34,7 @@ def count_requests(method: Callable) -> Callable:
         # make a new request
         html = method(url)
         # make  a new copy on the chache with 10 sec of expiration
-        r.setex(f"cached_html:{url}", 10, html)
+        r.setex("cached_html:{}".format(url), 10, html)
 
         return html
 
