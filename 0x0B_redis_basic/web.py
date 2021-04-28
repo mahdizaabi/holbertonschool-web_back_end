@@ -5,7 +5,7 @@ Implement an expiring web cache and tracker
 Web Stack programming ― Back-end
 """
 import redis
-import uuid
+import requests
 from typing import Union, Optional, Callable
 from functools import wraps
 
