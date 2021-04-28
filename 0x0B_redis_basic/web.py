@@ -43,7 +43,7 @@ def count_requests(method: Callable) -> Callable:
 
 @count_requests
 def get_page(url: str) -> str:
-    """track how many time the server has sent a request 
+    """track how many time the server has sent a request
     """
     req = requests.get(url)
     return req.text
