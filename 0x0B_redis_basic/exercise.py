@@ -62,7 +62,7 @@ def replay(fn: Callable):
     outputListKey = functionName + ":outputs"
     # get the number of calls to the function:
     r = redis.Redis()
-    number_calls = str(r.get(functionName).decode('utf-8'))
+    number_calls = r.get(functionName).decode('utf-8')
     print("{} was called {} times:".format(functionName, number_calls))
 
     # get list of inpus and ouputs:
@@ -71,11 +71,11 @@ def replay(fn: Callable):
 
     for inp, out in zip(inputs, outputs):
         try:
-            inp = str(inp.decode("utf-8"))
+            inp = inp.decode("utf-8")
         except Exception as e:
             inp = ""
         try:
-            out = str(out.decode("utf-8"))
+            out = out.decode("utf-8")
         except Exception as e:
             out = ""
         print("{}(*{},) -> {}".format(functionName, inp, out))
