@@ -72,8 +72,7 @@ def replay(fn: Callable):
     for inp, out in zip(inputs, outputs):
         inp = str(inp.decode("utf-8"))
         out = str(out.decode("utf-8"))
-        print("{}(*({},)) -> {}".format(functionName, inp, out))
-
+        print("{}(*{},) -> {}".format(functionName, inp, out))
 
 class Cache():
     """[Caching base Class using redis]
