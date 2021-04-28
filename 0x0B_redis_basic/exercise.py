@@ -31,19 +31,20 @@ def count_calls(method: Callable) -> Callable:
 
 
 def call_history(method: Callable) -> Callable:
-    """[summary]
+    """[keep track of all the inputs and outputs of a function]
 
     Args:
-        method (Callable): [description]
+        method (Callable): [function to be decorated]
 
     Returns:
-        Callable: [description]
+        Callable: [the bundled 2 functions: the inner-wrapper function and
+                the decorated]
     """
     key = method.__qualname__
 
     @wraps(method)
     def wrapper(self, *args, **kwargs):
-        """ Wrapper to decorate methods """
+        """ Wrapper to wrap the decorated function """
         input = str(args)
         self._redis.rpush(method.__qualname__ + ":inputs", input)
         output = str(method(self, *args, **kwargs))
@@ -55,28 +56,21 @@ def call_history(method: Callable) -> Callable:
 def replay(fn: Callable):
     """ implement a replay function to display the history of
     calls of a particular function"""
+    # generate the keys of input/output list stored on Redis
+    functionName = fn.__qualname__
+    inputListKey = functionName + ":inputs"
+    outputListKey = functionName + ":outputs"
+    # get the number of calls to the function:
     r = redis.Redis()
-    fcName = fn.__qualname__
-    calls = r.get(fcName)
-    try:
-        calls = calls.decode('utf-8')
-    except Exception as e:
-        calls = 0
-    print("{} was called {} times:".format(fcName, calls))
+    number_calls = r.get(functionName)
+    print("{} was called {} times:".format(functionName, number_calls))
 
-    inputs = r.lrange(fcName + ":inputs", 0, -1)
-    outputs = r.lrange(fcName + ":outputs", 0, -1)
+    # get list of inpus and ouputs:
+    inputs = r.lrange(inputListKey, 0, -1)
+    outputs = r.lrange(outputListKey, 0, -1)
 
-    for inn, out in zip(inputs, outputs):
-        try:
-            inn = inn.decode('utf-8')
-        except Exception as e:
-            inn = ""
-        try:
-            out = out.decode('utf-8')
-        except Exception as e:
-            out = ""
-        print("{}(*{}) -> {}".format(fcName, inn, out))
+    for inp, out in zip(inputs, outputs):
+        print("{}(*({},)) -> {}".format(functionName, inp, out))
 
 
 class Cache():
