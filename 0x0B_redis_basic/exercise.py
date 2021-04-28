@@ -70,6 +70,8 @@ def replay(fn: Callable):
     outputs = r.lrange(outputListKey, 0, -1)
 
     for inp, out in zip(inputs, outputs):
+        inp = str(inp.decode("utf-8"))
+        out = str(out.decode("utf-8"))
         print("{}(*({},)) -> {}".format(functionName, inp, out))
 
 
