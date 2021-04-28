@@ -78,7 +78,7 @@ def replay(fn: Callable):
             out = out.decode("utf-8")
         except Exception as e:
             out = ""
-        print("{}(*{},) -> {}".format(functionName, inp, out))
+        print("{}(*{}) -> {}".format(functionName, inp, out))
 
 
 class Cache():
