@@ -10,6 +10,7 @@ CREATE PROCEDURE AddBonus
 )
 
 BEGIN
+    DECLARE project_id INT;
     IF (SELECT COUNT(*) FROM projects WHERE name = project_name) = 0
     THEN
         INSERT INTO projects (name) VALUES (project_name);
