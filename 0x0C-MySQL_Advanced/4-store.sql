@@ -10,7 +10,7 @@ CREATE TRIGGER decrease_after_insert
 BEGIN
     UPDATE items 
     SET quantity = quantity - 1
-    WHERE name = NEW.item_name 
+    WHERE item_name = NEW.name 
 END $$
 
 DELIMITER;
