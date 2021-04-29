@@ -2,7 +2,7 @@
 -- In and not out
 select band_name,
 CASE
-    WHEN split IS NULL then (YEAR(CURRENT_DATE()) - formed)
+    WHEN split IS NULL then (2020 - formed)
     ELSE split - formed
 END AS lifespan
 FROM metal_bands
