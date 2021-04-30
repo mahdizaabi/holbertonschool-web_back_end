@@ -8,7 +8,7 @@ CREATE PROCEDURE AddBonus(
     project_name VARCHAR(255), 
     score FLOAT)
 BEGIN
-    DECLARE @project_id INT = 0;
+    DECLARE @project_id AS INT;
     IF (SELECT COUNT(*) FROM projects WHERE name = project_name) = 0
     THEN
         INSERT INTO projects (name) VALUES (project_name);
