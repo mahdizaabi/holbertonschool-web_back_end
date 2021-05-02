@@ -5,7 +5,7 @@ DROP PROCEDURE IF EXISTS computeAverageScoreForUser;
 DELIMITER $$
 
 
-CREATE PROCEDURE Addbonus(user_id INT)
+CREATE PROCEDURE computeAverageScoreForUser(user_id INT)
 
 BEGIN
     SET @average = (
