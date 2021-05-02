@@ -8,13 +8,10 @@ DELIMITER $$
 CREATE PROCEDURE Addbonus(user_id INT, project_name VARCHAR(255), score INT)
 
 BEGIN
-    IF EXISTS(SELECT * from projects WHERE name =project_name) = 0 THEN
-        INSERT into projects (name) values(project_name);
-        SET @NewInsertedProject = LAST_INSERT_ID();
-    ELSE
-        set @NewInsertedProject = SELECT * from projects where (name = project_name);
+    IF (EXISTS(SELECT * from projects WHERE name = project_name)) = 0 THEN
+        INSERT INTO projects (name) VALUES (project_name);
     END IF;
-
-    INSERT INTO corrections (user_id, project_id, score) VALUES (user_id, @NewInsertedProject, score);
+    SET @projectid = (SELECT id FROM projects WHERE name = project_name LIMIT 1);
+    INSERT INTO corrections (user_id, project_id, score) VALUES(user_id, @projectid, score);
 END $$
 DELIMITER ;
