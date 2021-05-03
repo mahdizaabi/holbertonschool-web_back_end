@@ -1,4 +1,4 @@
--- verage weighted score for all!
+-- procedure for the verage weighted score 
 -- creates a stored procedure 
 DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUsers;
 DELIMITER $$
