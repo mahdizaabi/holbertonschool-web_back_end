@@ -14,6 +14,6 @@ BEGIN
     ON corrections.project_id = projects.id
     WHERE p.user_id = user_id
     UPDATE users
-    SET average_score = WeightAverageScore WHERE id=user_id;
+    SET average_score = @avgWeighted WHERE id=user_id;
 END $$
 DELIMITER ;
