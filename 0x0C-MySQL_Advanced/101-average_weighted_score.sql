@@ -17,9 +17,9 @@ WHILE i<n DO
     FROM projects 
     LEFT JOIN corrections 
     ON corrections.project_id = projects.id
-    WHERE (SELECT id as xxx FROM users  LIMIT i,1));
+    WHERE (SELECT id FROM users  LIMIT i,1));
     UPDATE users
-    SET average_score = @avgWeighted WHERE id = xxx; 
+    SET average_score = @avgWeighted WHERE id = (SELECT id FROM users  LIMIT i,1); 
     SET i = i + 1;
 END WHILE;
 END $$
