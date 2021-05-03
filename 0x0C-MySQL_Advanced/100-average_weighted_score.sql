@@ -9,10 +9,10 @@ CREATE PROCEDURE ComputeAverageWeightedScoreForUser(user_id INT)
 
 BEGIN
     SET @avgWeighted = (SELECT SUM(score * weight) / SUM(weight) 
-    FROM projects p
-    LEFT JOIN corrections
+    FROM projects 
+    LEFT JOIN corrections 
     ON corrections.project_id = projects.id
-    WHERE p.user_id = user_id);
+    WHERE corrections.user_id = user_id);
     UPDATE users
     SET average_score = @avgWeighted WHERE id=user_id;
 END $$
