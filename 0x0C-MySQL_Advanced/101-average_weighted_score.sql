@@ -1,11 +1,11 @@
 -- 5. Email validation to sent
 -- a trigger to resets the attribute valid_email only when the email has been changed
 
-DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUser;
+DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUsers;
 DELIMITER $$
 
 
-CREATE PROCEDURE ComputeAverageWeightedScoreForUser()
+CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
 
 BEGIN
     DECLARE n INT DEFAULT 0;
@@ -17,9 +17,9 @@ WHILE i<n DO
     FROM projects 
     LEFT JOIN corrections 
     ON corrections.project_id = projects.id
-    WHERE (SELECT id FROM users  LIMIT i,1));
+    WHERE (SELECT id as xxx FROM users  LIMIT i,1));
     UPDATE users
-    SET average_score = @avgWeighted WHERE (id = (SELECT id FROM users LIMIT i,1)); 
+    SET average_score = @avgWeighted WHERE id = xxx; 
     SET i = i + 1;
 END WHILE;
 END $$
