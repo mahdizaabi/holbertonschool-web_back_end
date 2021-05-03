@@ -1,18 +1,26 @@
--- procedure for the verage weighted score 
--- creates a stored procedure 
-DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUsers;
+-- 5. Email validation to sent
+-- a trigger to resets the attribute valid_email only when the email has been changed
+
+DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUser;
 DELIMITER $$
-CREATE PROCEDURE ComputeAverageWeightedScoreForUsers()
+
+
+CREATE PROCEDURE ComputeAverageWeightedScoreForUser()
+
 BEGIN
-    UPDATE users AS U, 
-        (SELECT U.id, SUM(score * weight) / SUM(weight) AS w_avg 
-        FROM users AS U 
-        JOIN corrections as cor ON U.id=cor.user_id 
-        JOIN projects AS P ON cor.project_id=P.id 
-        GROUP BY U.id)
-    AS WA
-    SET U.average_score = WA.w_avg 
-    WHERE U.id=WA.id;
-END
-$$
+    DECLARE n INT DEFAULT 0;
+    DECLARE i INT DEFAULT 0;
+    SELECT COUNT(*) FROM users INTO n;
+    SET i=0;
+WHILE i<n DO 
+    SET @avgWeighted = (SELECT SUM(score * weight) / SUM(weight) 
+    FROM projects 
+    LEFT JOIN corrections 
+    ON corrections.project_id = projects.id
+    WHERE (SELECT id FROM users  LIMIT i,1));
+    UPDATE users
+    SET average_score = @avgWeighted WHERE (SELECT id FROM users LIMIT i,1); 
+    SET i = i + 1;
+END WHILE;
+END $$
 DELIMITER ;
