@@ -1,19 +1,19 @@
--- 12. Average weighted score
--- creates a stored procedure ComputeAverageWeightedScoreForUser to store the average weighted score for a student
+-- 5. Email validation to sent
+-- a trigger to resets the attribute valid_email only when the email has been changed
+
 DROP PROCEDURE IF EXISTS ComputeAverageWeightedScoreForUser;
 DELIMITER $$
-CREATE PROCEDURE ComputeAverageWeightedScoreForUser(
-    user_id INT
-)
+
+
+CREATE PROCEDURE ComputeAverageWeightedScoreForUser(user_id INT)
+
 BEGIN
-    DECLARE WeightAverageScore FLOAT;
-    SET WeightAverageScore = (SELECT SUM(score * weight) / SUM(weight) 
-    FROM users AS U 
-    JOIN corrections as C ON U.id=C.user_id 
-    JOIN projects AS P ON C.project_id=P.id 
-    WHERE U.id=user_id);
+    SET @avgWeighted = SELECT SUM(score * weight) / SUM(weight) 
+    FROM projects p
+    LEFT JOIN corrections
+    ON corrections.project_id = projects.id
+    WHERE p.user_id = user_id
     UPDATE users
     SET average_score = WeightAverageScore WHERE id=user_id;
-END
-$$
+END $$
 DELIMITER ;
