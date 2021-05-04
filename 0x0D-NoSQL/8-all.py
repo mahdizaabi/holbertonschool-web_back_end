@@ -5,10 +5,10 @@ import pprint
 from pymongo import MongoClient
 
 
-def selectedDb.school.find():
+def list_all(mongo_collection):
     """[summary]
     """
 
-    if selectedDb.school.count() == 0:
+    if mongo_collection.count() == 0:
         return []
-    return selectedDb.school.find()
+    return mongo_collection.find()
