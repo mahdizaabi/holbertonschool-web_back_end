@@ -1,2 +1,2 @@
 // lists all documents with name tarting by Holberton in the collection school
-db.school.find({name: {'$regex': 'school', '$options': 'i'}}, {"name": 1})
+db.school.find({name: {'$regex': /Holberton/, '$options': 'i'}}, {"name": 1})
