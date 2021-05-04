@@ -12,4 +12,4 @@ def update_topics(mongo_collection, name, topics):
         name ([school name: filter the docs by the scchool name]): [string]
         topics ([list of topic to be inserted on the dociment]): [description]
     """
-    mongo_collection.update({"name":name}, {$set: {"topics":topics}}, {multi: true})
+    mongo_collection.update_many({"name":name}, {"$set": {"topics":topics}})
