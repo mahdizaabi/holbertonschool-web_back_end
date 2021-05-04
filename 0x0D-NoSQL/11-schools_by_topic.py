@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 
 def schools_by_topic(mongo_collection, topic):
-    """[function that returns the list of school having a specific topic]
+    """[function that returns the list of school having an array containing a specific topic]
 
     Args:
         mongo_collection ([collection object]): [collection]
