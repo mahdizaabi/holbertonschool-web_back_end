@@ -1,3 +1,4 @@
 export default function returnHowManyArguments() {
-  return arguments.length;
+    let args = Array.from(arguments)
+    return args.length
 }
