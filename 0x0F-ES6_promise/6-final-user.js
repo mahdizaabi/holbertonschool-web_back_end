@@ -4,12 +4,12 @@ import uploadPhoto from './5-photo-reject';
 export default async function handleProfileSignup(firstName, lastName, fileName) {
   let rejectedProm = {};
   const Prom1 = await signUpUser(firstName, lastName);
-  const resolvedProm = { status: 'resolved', values: { ...Prom1 } };
+  const resolvedProm = { status: 'fulfilled', value: { ...Prom1 } };
   try {
     /*eslint-disable */
     let Prom2 = await uploadPhoto(fileName);
   } catch (e) {
-    rejectedProm = { status: 'rejected', values: e.toString() };
+    rejectedProm = { status: 'rejected', value: e.toString() };
   }
   return [resolvedProm, rejectedProm];
 }
