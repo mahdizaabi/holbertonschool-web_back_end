@@ -11,5 +11,5 @@ export default async function handleProfileSignup(firstName, lastName, fileName)
   } catch (e) {
     rejectedProm = { status: 'rejected', value: e.toString() };
   }
-  return [resolvedProm, rejectedProm];
+  return new Promise((resolve=>resolve([resolvedProm, rejectedProm])));
 }
