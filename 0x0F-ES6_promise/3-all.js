@@ -1,5 +1,5 @@
 import { uploadPhoto, createUser } from './utils';
-/*
+
 function handleProfileSignup() {
   return Promise.all([uploadPhoto(), createUser()])
     .then((values) => {
@@ -9,14 +9,13 @@ function handleProfileSignup() {
       console.log(`${body} ${firstName} ${lastName}`);
     })
     .catch(() => console.log('Signup system offline'));
-    return;
 }
 
 export default handleProfileSignup;
-*/
 
+/* second working method
 export default function handleProfileSignup() {
-  return uploadPhoto()
+  uploadPhoto()
     .then((response1) => {
       createUser()
         .then((response2) => console.log(
@@ -26,3 +25,4 @@ export default function handleProfileSignup() {
         ));
     }).catch(() => console.log('Signup system offline'));
 }
+*/
