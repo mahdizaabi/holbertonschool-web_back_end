@@ -9,6 +9,7 @@ function handleProfileSignup() {
       console.log(`${body} ${firstName} ${lastName}`);
     })
     .catch(() => console.log('Signup system offline'));
+    return;
 }
 
 export default handleProfileSignup;
