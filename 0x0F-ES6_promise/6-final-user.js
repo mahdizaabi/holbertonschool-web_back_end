@@ -1,9 +1,15 @@
 import signUpUser from './4-user-promise';
 import uploadPhoto from './5-photo-reject';
 
-export default function handleProfileSignup(firstName, lastName, fileName) {
-  const Prom1 = signUpUser(firstName, lastName);
-  const Prom2 = uploadPhoto(fileName);
-  return Promise.allSettled([Prom1, Prom2])
-    .then((results) => results).catch((e) => e);
+export default async function handleProfileSignup(firstName, lastName, fileName) {
+  let rejectedProm = {};
+  const Prom1 = await signUpUser(firstName, lastName);
+  const resolvedProm = { status: 'resolved', values: { ...Prom1 } };
+  try {
+    /*eslint-disable */
+    let Prom2 = await uploadPhoto(fileName);
+  } catch (e) {
+    rejectedProm = { status: 'rejected', values: e.toString() };
+  }
+  return [resolvedProm, rejectedProm];
 }
