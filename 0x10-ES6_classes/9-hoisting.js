@@ -1,7 +1,7 @@
 class HolbertonClass {
   constructor(year, location) {
-    this.year = year;
-    this.location = location;
+    this._year = year;
+    this._location = location;
   }
 
   get year() {
@@ -15,9 +15,9 @@ class HolbertonClass {
 
 class StudentHolberton {
   constructor(firstName, lastName, holbertonClass) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.holbertonClass = holbertonClass;
+    this._firstName = firstName;
+    this._lastName = lastName;
+    this._holbertonClass = holbertonClass;
   }
 
   get fullName() {
@@ -41,6 +41,5 @@ const student2 = new StudentHolberton('John', 'Doe', class2020);
 const student3 = new StudentHolberton('Albert', 'Clinton', class2019);
 const student4 = new StudentHolberton('Donald', 'Bush', class2019);
 const student5 = new StudentHolberton('Jason', 'Sandler', class2019);
-// listOfStudents should be initialized first, otherwise, will return undefined
 const listOfStudents = [student1, student2, student3, student4, student5];
 export default listOfStudents;
