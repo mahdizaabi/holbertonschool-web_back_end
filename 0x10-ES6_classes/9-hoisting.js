@@ -1,7 +1,7 @@
 class HolbertonClass {
   constructor(year, location) {
-    this._year = year;
-    this._location = location;
+    this.year = year;
+    this.location = location;
   }
 
   get year() {
@@ -15,9 +15,9 @@ class HolbertonClass {
 
 class StudentHolberton {
   constructor(firstName, lastName, holbertonClass) {
-    this._firstName = firstName;
-    this._lastName = lastName;
-    this._holbertonClass = holbertonClass;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.holbertonClass = holbertonClass;
   }
 
   get fullName() {
