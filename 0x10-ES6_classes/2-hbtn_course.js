@@ -38,7 +38,7 @@ export default class HolbertonCourse {
     if (Array.isArray(students) && ((students.find((s) => typeof s !== 'string')) === 'undefined')) {
       this._students = students;
     } else {
-      throw new TypeError('students must be an array of Strings');
+      throw new TypeError('students must be an array of strings');
     }
   }
 }
