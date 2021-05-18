@@ -1,1 +1,3 @@
-export default (set, start) => ([...set].filter((item) => start !== '' && item.includes(start)).map((i) => i.slice(start.length)).join('-')) || '';
+export default (set, start) => [...set]
+  .filter((item) => start !== '' && item.includes(start))
+  .map((i) => i.slice(start.length)).join('-');
