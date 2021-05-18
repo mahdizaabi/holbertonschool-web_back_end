@@ -1,2 +1,7 @@
-export default (m) => ((m instanceof Map) && (m.forEach((v, k) => ((v === 1)
-    && m.set(k, 100)) || ((m instanceof Map) && (m.set(k, v)))))) || (function e() { throw new Error('Cannot process'); }());
+export default (map) => {
+  if (!(map instanceof Map)) {
+    throw Error('Cannot process');
+  }
+  map.forEach((v, k) => (v === 1 ? map.set(k, 100) : map.set(k, v)));
+  return map;
+};
