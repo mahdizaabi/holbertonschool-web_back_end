@@ -5,7 +5,8 @@ const filename = process.argv[2];
 const app = http.createServer();
 app.on('request', (request, response) => {
   request.on('error', (err) => {
-    console.error(err);
+    response.statusCode = 404;
+    response.end(err.message);
   });
   const csList = [];
   const sweList = [];
