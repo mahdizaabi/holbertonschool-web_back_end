@@ -15,7 +15,8 @@ app.on('request', (request, response) => {
       fs.readFile(filename, 'utf8', (err, data) => {
         if (err) {
           response.statusCode = 404;
-          response.end(err.message);
+          response.end('Cannot load the database');
+          return;
         }
         response.writeHead(200, { 'Content-Type': 'text/plain' });
         const lines = data.split(/\r?\n/);
