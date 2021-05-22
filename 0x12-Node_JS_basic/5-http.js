@@ -15,7 +15,7 @@ app.on('request', (request, response) => {
       response.write(`Number of students in CS: ${nCs}. List: ${listCs}\n`);
       response.write(`Number of students in SWE: ${nSwe}. List: ${listSwe}\n`);
       response.end();
-    });
+    }).catch((e) => console.log(e));
   } else {
     const body = 'Hello Holberton School!';
     response
