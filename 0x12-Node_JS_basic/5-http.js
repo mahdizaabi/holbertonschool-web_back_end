@@ -9,21 +9,21 @@ app.on('request', (request, response) => {
       listCs, nCs, listSwe, nSwe,
     }) => {
       const studentsCount = nCs + nSwe;
+      response.writeHead(200, { 'Content-Type': 'text/plain' });
       response.write('This is the list of our students\n');
       response.write(`Number of students: ${studentsCount}\n`);
       response.write(`Number of students in CS: ${nCs}. List: ${listCs}\n`);
       response.write(`Number of students in SWE: ${nSwe}. List: ${listSwe}\n`);
       response.end();
     });
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
   } else {
     const body = 'Hello Holberton School!';
     response
       .writeHead(200, {
-        'Content-Length': Buffer.byteLength(body),
         'Content-Type': 'text/plain',
-      })
-      .end(body);
+      });
+    response.write(body);
+    response.end();
   }
 });
 app.listen(1245);
