@@ -4,6 +4,9 @@ const fs = require('fs');
 const filename = process.argv[2];
 const app = http.createServer();
 app.on('request', (request, response) => {
+  request.on('error', (err) => {
+    console.error(err);
+  });
   const csList = [];
   const sweList = [];
   if (request.method === 'GET' && request.url === '/students') {
@@ -23,19 +26,15 @@ app.on('request', (request, response) => {
       response.write(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}\n`);
       response.write(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
       response.end();
-
-      response.on('error', (err) => {
-        console.log(err);
-      });
     });
   } else {
     const body = 'Hello Holberton School!';
-    response
-      .writeHead(200, {
-        'Content-Length': Buffer.byteLength(body),
-        'Content-Type': 'text/plain',
-      })
-      .end(body);
+    response.writeHead(200, {
+      'Content-Length': Buffer.byteLength(body),
+      'Content-Type': 'text/plain',
+    });
+    response.write(body);
+    response.end();
   }
 });
 app.listen(1245);
