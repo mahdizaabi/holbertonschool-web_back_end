@@ -12,6 +12,9 @@ app.on('request', (request, response) => {
   if (request.method === 'GET' && request.url === '/students') {
     response.writeHead(200, { 'Content-Type': 'text/plain' });
     fs.readFile(filename, 'utf8', (err, data) => {
+      if (err) {
+        response.end(err.message);
+      }
       const lines = data.split(/\r?\n/);
       lines.forEach((line) => {
         if (line.includes('CS')) {
@@ -21,7 +24,7 @@ app.on('request', (request, response) => {
         }
       });
       const studentsCount = csList.length + sweList.length;
-      response.write('this is the list of the students\n');
+      response.write('This is the list of our students\n');
       response.write(`Number of students: ${studentsCount}\n`);
       response.write(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}\n`);
       response.write(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
