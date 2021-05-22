@@ -6,6 +6,7 @@ const app = http.createServer();
 app.on('request', (request, response) => {
   request.on('error', (err) => {
     response.statusCode = 404;
+    response.write('This is the list of our students\n');
     response.end(err.message);
   });
 
@@ -37,6 +38,7 @@ app.on('request', (request, response) => {
       });
     } catch (e) {
       response.statusCode = 404;
+      response.write('This is the list of our students\n');
       response.end('Cannot load the database');
     }
   } else {
