@@ -19,7 +19,7 @@ function countStudents(pathFile) {
     console.log(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
     console.log(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
   } catch (err) {
-    console.error(err);
+    throw new Error('Cannot load the database');
   }
 }
 
