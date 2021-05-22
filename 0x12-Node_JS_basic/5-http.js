@@ -8,6 +8,7 @@ app.on('request', (request, response) => {
     response.statusCode = 404;
     response.end(err.message);
   });
+
   const csList = [];
   const sweList = [];
   if (request.method === 'GET' && request.url === '/students') {
@@ -36,7 +37,7 @@ app.on('request', (request, response) => {
       });
     } catch (e) {
       response.statusCode = 404;
-      response.end(e.message);
+      response.end('Cannot load the database');
     }
   } else {
     const body = 'Hello Holberton School!';
