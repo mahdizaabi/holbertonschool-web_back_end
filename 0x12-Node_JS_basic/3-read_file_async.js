@@ -1,6 +1,6 @@
 const readFile = require('fs/promises');
 
-async function countStudents(fileName) {
+function countStudents(fileName) {
   const csList = [];
   const sweList = [];
 
@@ -17,6 +17,7 @@ async function countStudents(fileName) {
     console.log(`Number of students: ${studentsCount}`);
     console.log(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
     console.log(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
+    return Promise.resolve();
   }).catch(() => Promise.reject(Error('Cannot load the database')));
 }
 
