@@ -10,11 +10,12 @@ app.on('request', (request, response) => {
   const csList = [];
   const sweList = [];
   if (request.method === 'GET' && request.url === '/students') {
-    response.writeHead(200, { 'Content-Type': 'text/plain' });
     fs.readFile(filename, 'utf8', (err, data) => {
       if (err) {
+        response.statusCode = 404;
         response.end(err.message);
       }
+      response.writeHead(200, { 'Content-Type': 'text/plain' });
       const lines = data.split(/\r?\n/);
       lines.forEach((line) => {
         if (line.includes('CS')) {
@@ -33,7 +34,6 @@ app.on('request', (request, response) => {
   } else {
     const body = 'Hello Holberton School!';
     response.writeHead(200, {
-      'Content-Length': Buffer.byteLength(body),
       'Content-Type': 'text/plain',
     });
     response.write(body);
