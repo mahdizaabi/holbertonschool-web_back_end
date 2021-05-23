@@ -7,7 +7,7 @@ const app = express();
 app.get('/', (request, response) => {
   response.send('Hello Holberton School!');
 });
-app.get('/students', (req, response) => {
+app.get('/students', (req, response, next) => {
   dataQuery(filename).then(({
     listCs, nCs, listSwe, nSwe,
   }) => {
@@ -17,7 +17,7 @@ app.get('/students', (req, response) => {
 Number of students: ${studentsCount}
 Number of students in CS: ${nCs}. List: ${listCs}
 Number of students in SWE: ${nSwe}. List: ${listSwe}`);
-  }).catch((error) => response.send(error));
+  }).catch((error) => next(error));
 });
 const port = 1245;
 app.listen(port);
