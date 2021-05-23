@@ -2,10 +2,13 @@ import readDatabase from '../utils';
 
 class StudentsController {
   static getAllStudents(request, response, filename) {
-    readDatabase(filename).then(({ cs, swe }) => {
-      response.status(200).send(`This is the list of our students
-Number of students in CS: ${cs.length}. List: ${cs.join(', ')}
-Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
+    readDatabase(filename).then((data) => {
+      const message = [];
+      const welcomeMessage = 'This is the list of our students';
+      for (const [key, value] of Object.entries(data)) {
+        message.push(`Number of students in ${key}: ${value.length}. List: ${value.join(', ')}`);
+      }
+      response.status(200).send(`${welcomeMessage}\n${message.join('\n')}`);
     }).catch(() => {
       response.status(500).send('Cannot load the database');
     });
