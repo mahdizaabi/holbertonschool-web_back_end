@@ -8,15 +8,8 @@ app.get('/', (request, response) => {
   response.send('Hello Holberton School!');
 });
 app.get('/students', (req, response) => {
-  dataQuery(filename).then(({
-    listCs, nCs, listSwe, nSwe,
-  }) => {
-    const studentsCount = nCs + nSwe;
-    /*eslint-disable */
-    response.send(`This is the list of our students
-Number of students: ${studentsCount}
-Number of students in CS: ${nCs}. List: ${listCs}
-Number of students in SWE: ${nSwe}. List: ${listSwe}`);
+  dataQuery(filename).then(({ httpResponse }) => {
+    response.send(`This is the list of our students\n${httpResponse.join('\n')}`);
   }).catch((error) => {
     response.send(`This is the list of our students\n${error.message}`);
   });
