@@ -18,7 +18,7 @@ Number of students: ${studentsCount}
 Number of students in CS: ${nCs}. List: ${listCs}
 Number of students in SWE: ${nSwe}. List: ${listSwe}`);
   }).catch((error) => {
-    res.send(`This is the list of our students${error.message}`);
+    response.send(`This is the list of our students\n${error.message}`);
   });
 });
 const port = 1245;
