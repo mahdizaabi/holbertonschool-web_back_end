@@ -1,6 +1,6 @@
 class AppController {
   static getHomepage(request, response) {
-    response.send(200, 'Hello Holberton School!');
+    response.status(200).send('Hello Holberton School!');
   }
 }
 
