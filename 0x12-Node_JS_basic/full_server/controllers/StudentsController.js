@@ -14,8 +14,8 @@ Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
   static getAllStudentsByMajor(request, response, filename) {
     readDatabase(filename).then(({ cs, swe }) => {
       if (request.params.major === 'CS' || request.params.major === 'SWE') {
-        if (request.path === 'SWE') response.send(`List: ${swe.join(', ')}`);
-        else response.send(`List: ${cs.join(', ')}`);
+        if (request.params.major === 'SWE') response.send(`200, List: ${swe.join(', ')}`);
+        else response.send(200, `List: ${cs.join(', ')}`);
       } else {
         response.send(500, 'Major parameter must be CS or SWE');
       }
