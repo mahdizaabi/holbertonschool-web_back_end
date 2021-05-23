@@ -5,16 +5,9 @@ const filename = process.argv[2];
 const app = http.createServer();
 app.on('request', (request, response) => {
   if (request.method === 'GET' && request.url === '/students') {
-    databaQuery(filename).then(({
-      listCs, nCs, listSwe, nSwe,
-    }) => {
-      const studentsCount = nCs + nSwe;
+    databaQuery(filename).then(({ httpResponse }) => {
       response.writeHead(200, { 'Content-Type': 'text/plain' });
-      response.write('This is the list of our students\n');
-      response.write(`Number of students: ${studentsCount}\n`);
-      response.write(`Number of students in CS: ${nCs}. List: ${listCs}\n`);
-      response.write(`Number of students in SWE: ${nSwe}. List: ${listSwe}\n`);
-      response.end();
+      response.end(`This is the list of our students\n${httpResponse.join('\n')}`);
     }).catch((e) => {
       response.write('This is the list of our students\n');
       response.end(e.message);
