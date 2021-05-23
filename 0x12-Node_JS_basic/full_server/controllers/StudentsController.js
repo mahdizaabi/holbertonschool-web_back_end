@@ -1,4 +1,4 @@
-const readDatabase = require('../utils');
+import readDatabase from '../utils';
 
 class StudentsController {
   static getAllStudents(request, response, filename) {
@@ -25,3 +25,4 @@ Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
   }
 }
 module.exports = StudentsController;
+export default StudentsController;

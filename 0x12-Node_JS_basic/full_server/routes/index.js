@@ -1,7 +1,7 @@
-const express = require('express');
+import StudentsController from '../controllers/StudentsController';
+import AppController from '../controllers/AppController';
 
-const AppController = require('../controllers/AppController');
-const StudentsController = require('../controllers/StudentsController');
+const express = require('express');
 
 const router = express.Router();
 router.get('/', AppController.getHomepage);

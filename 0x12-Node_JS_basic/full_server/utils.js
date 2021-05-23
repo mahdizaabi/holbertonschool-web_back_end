@@ -25,4 +25,4 @@ function readDatabase(path) {
     });
   });
 }
-module.exports = readDatabase;
+export default readDatabase;
