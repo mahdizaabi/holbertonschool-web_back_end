@@ -20,10 +20,12 @@ function countStudents(path) {
         }
       });
       const studentsCount = csList.length + sweList.length;
+      console.log(`Number of students: ${studentsCount}`);
+      console.log(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
+      console.log(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
       httpResponse.push(`Number of students: ${studentsCount}`);
       httpResponse.push(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
       httpResponse.push(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
-      console.log(`${httpResponse.join('\n')}`);
       resolve({
         httpResponse,
       });
