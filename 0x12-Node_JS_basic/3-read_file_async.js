@@ -3,7 +3,6 @@ const fs = require('fs');
 function countStudents(path) {
   const csList = [];
   const sweList = [];
-  const dataSend = [];
 
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
@@ -25,14 +24,11 @@ function countStudents(path) {
       const listSwe = sweList.join(', ');
       const nSwe = sweList.length;
 
-      dataSend.push(`Number of students: ${studentsCount}\n`);
-      dataSend.push(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}\n`);
-      dataSend.push(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}\n`);
-      for (const data of dataSend) {
-        process.stdout.write(data);
-      }
+      console.log(`Number of students: ${studentsCount}`);
+      console.log(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
+      console.log(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
       resolve({
-        listCs, nCs, listSwe, nSwe, dataSend,
+        listCs, nCs, listSwe, nSwe,
       });
     });
   });
