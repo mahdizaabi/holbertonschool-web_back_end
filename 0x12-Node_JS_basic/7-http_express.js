@@ -12,11 +12,11 @@ app.get('/students', (req, response, next) => {
     listCs, nCs, listSwe, nSwe,
   }) => {
     const studentsCount = nCs + nSwe;
-    response.send(`This is the list of our students\n
-    Number of students: ${studentsCount}\n
-    Number of students in CS: ${nCs}. List: ${listCs}\n
-    Number of students in SWE: ${nSwe}. List: ${listSwe}
-    `);
+    /*eslint-disable */
+    response.send(`This is the list of our students
+Number of students: ${studentsCount}
+Number of students in CS: ${nCs}. List: ${listCs}
+Number of students in SWE: ${nSwe}. List: ${listSwe}`);
   }).catch((error) => next(error));
 });
 const port = 1245;
