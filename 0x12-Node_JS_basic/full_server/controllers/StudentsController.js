@@ -12,16 +12,16 @@ Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
   }
 
   static getAllStudentsByMajor(request, response, filename) {
-    readDatabase(filename).then(({ cs, swe }) => {
-      if (request.params.major === 'CS' || request.params.major === 'SWE') {
+    if (request.params.major !== 'CS' && request.params.major !== 'SWE') {
+      response.send(500, 'Major parameter must be CS or SWE');
+    } else {
+      readDatabase(filename).then(({ cs, swe }) => {
         if (request.params.major === 'SWE') response.status(200).send(`List: ${swe.join(', ')}`);
         else response.status(200).send(`List: ${cs.join(', ')}`);
-      } else {
-        response.status(500).send('Major parameter must be CS or SWE');
-      }
-    }).catch(() => {
-      response.status(500).send('Cannot load the database');
-    });
+      }).catch(() => {
+        response.status(500).send('Cannot load the database');
+      });
+    }
   }
 }
 module.exports = StudentsController;
