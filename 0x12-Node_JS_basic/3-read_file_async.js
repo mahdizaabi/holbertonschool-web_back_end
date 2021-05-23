@@ -3,6 +3,7 @@ const fs = require('fs');
 function countStudents(path) {
   const csList = [];
   const sweList = [];
+  const httpResponse = [];
 
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
@@ -27,8 +28,11 @@ function countStudents(path) {
       console.log(`Number of students: ${studentsCount}`);
       console.log(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
       console.log(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
+      httpResponse.push(`Number of students: ${studentsCount}`);
+      httpResponse.push(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
+      httpResponse.push(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
       resolve({
-        listCs, nCs, listSwe, nSwe,
+        listCs, nCs, listSwe, nSwe, httpResponse,
       });
     });
   });
