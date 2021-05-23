@@ -16,7 +16,7 @@ class StudentsController {
 
   static getAllStudentsByMajor(request, response, filename) {
     if (request.params.major !== 'CS' && request.params.major !== 'SWE') {
-      response.send(500, 'Major parameter must be CS or SWE');
+      response.status(500).send('Major parameter must be CS or SWE');
     } else {
       readDatabase(filename).then(({ cs, swe }) => {
         if (request.params.major === 'SWE') response.status(200).send(`List: ${swe.join(', ')}`);
