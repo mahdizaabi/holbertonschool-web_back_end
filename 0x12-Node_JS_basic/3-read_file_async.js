@@ -20,11 +20,6 @@ function countStudents(path) {
         }
       });
       const studentsCount = csList.length + sweList.length;
-      const listCs = csList.join(', ');
-      const nCs = csList.length;
-      const listSwe = sweList.join(', ');
-      const nSwe = sweList.length;
-
       console.log(`Number of students: ${studentsCount}`);
       console.log(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
       console.log(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
@@ -32,7 +27,7 @@ function countStudents(path) {
       httpResponse.push(`Number of students in CS: ${csList.length}. List: ${csList.join(', ')}`);
       httpResponse.push(`Number of students in SWE: ${sweList.length}. List: ${sweList.join(', ')}`);
       resolve({
-        listCs, nCs, listSwe, nSwe, httpResponse,
+        httpResponse,
       });
     });
   });
