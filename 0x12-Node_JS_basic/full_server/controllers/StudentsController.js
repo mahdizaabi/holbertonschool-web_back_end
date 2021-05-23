@@ -6,8 +6,8 @@ class StudentsController {
       response.status(200).send(`This is the list of our students
 Number of students in CS: ${cs.length}. List: ${cs.join(', ')}
 Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
-    }).catch((error) => {
-      response.status(500).send(`This is the list of our students\n${error.message}`);
+    }).catch(() => {
+      response.status(500).send('Cannot load the database');
     });
   }
 
@@ -19,8 +19,8 @@ Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
       } else {
         response.status(500).send('Major parameter must be CS or SWE');
       }
-    }).catch((error) => {
-      response.status(500).send(`This is the list of our students\n${error.message}`);
+    }).catch(() => {
+      response.status(500).send('Cannot load the database');
     });
   }
 }
