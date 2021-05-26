@@ -1,4 +1,4 @@
-const assert = require('chai').assert;
+const chai = require('chai');
 const calculateNumber = require('./2-calcul_chai');
 
 describe('Add()', function () {
@@ -10,7 +10,7 @@ describe('Add()', function () {
     tests.forEach(({ args, expected }) => {
         it(`correctly add ${args[1]} and ${args[2]} args`, function () {
             const res = calculateNumber(...args);
-            assert.equal(res, expected);
+            chai.expect(res).to.equal(expected);
         });
     });
 });
@@ -24,7 +24,7 @@ describe('Substract()', function () {
     tests.forEach(({ args, expected }) => {
         it(`correctly Substract ${args[1]} and ${args[2]}`, function () {
             const res = calculateNumber(...args);
-            assert.equal(res, expected);
+            chai.expect(res).to.equal(expected);
         });
     });
 });
@@ -38,7 +38,7 @@ describe('Division()', function () {
     tests.forEach(({ args, expected }) => {
         it(`correctly divided ${args[1]} and ${args[2]}`, function () {
             const res = calculateNumber(...args);
-            assert.equal(res, expected);
+            chai.expect(res).to.equal(expected);
         });
     });
 });
@@ -46,7 +46,7 @@ describe('Division()', function () {
 describe('Edgecases()', function () {
     describe('subzero', function () {
         it("cant be zero", function () {
-            assert.equal(calculateNumber("DIVIDE", 14, 0), "Error");
+            chai.expect(calculateNumber("DIVIDE", 14, 0)).to.equal("Error");
         });
     })
 });
