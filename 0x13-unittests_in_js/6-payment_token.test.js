@@ -1,5 +1,5 @@
 const { getPaymentTokenFromAPI } = require('./6-payment_token');
-var { assert } = require('chai');
+const { assert } = require('chai');
 
 describe('getPaymentTokenFromAPI', function () {
     describe('Async tests with done', function () {
