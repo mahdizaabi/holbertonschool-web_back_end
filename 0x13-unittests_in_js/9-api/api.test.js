@@ -7,18 +7,18 @@ const serverUrl = 'http://localhost:7865'
 function fetchServer(serverUrl) {
     return new Promise((resolve, reject) => {
         request(serverUrl, (e, res, body) => {
-            if (e) {
-                resolve({ res, body, e })
+            if (!e && res.statusCode == 200) {
+                resolve({ res, body })
             }
             else {
-                reject(e)
+                reject(res)
             }
         })
     })
 }
 
 describe('Basic Integration testing', function () {
-    describe('test server response after GET request', function () {
+    describe('test server response => GET request', function () {
         describe('GET /', () => {
             it('Code: 200 | Body: Welcome to the payment system', (done) => {
                 const options = {
@@ -31,42 +31,31 @@ describe('Basic Integration testing', function () {
                     done();
                 });
             });
+            it('test the response', function (done) {
+                fetchServer(serverUrl).then(({ res, body }) => {
+                    expect(res.statusCode).to.equal(200);
+                    expect(body).to.equal('Welcome to the payment system');
+                    done();
+                }).catch((error) => done(error))
+            });
         });
-        it('test the response', function (done) {
-            fetchServer(serverUrl).then(({ response, body }) => {
-                expect(response.statusCode).to.equal(200);
-                expect(body).to.equal('Welcome to the payment system');
-                done();
-            }).catch((error) => done(error))
-        });
-        it('test error after failed request', function (done) {
-            fetchServer('http://localhost:7866').then(({ e }) => {
-                done();
-            }).catch((error) => {
-                done(error)
-                assert.throws(error);
-            })
-        });
+        describe('GET /cart/:id', () => {
+            it('GET /cart/:id with valid id', function () {
+                return fetchServer('http://localhost:7865/cart/14')
+                    .then(({ res }) => {
+                        expect(res.statusCode).to.equal(200);
+                        expect(res.body).to.equal('Payment methods for cart 14');
+                    });
+            });
+            it('GET /cart/:id with invalid id', function () {
+                return fetchServer('http://localhost:7865/cart/m')
+                    .catch(e => {
+                        expect(e.statusCode).to.equal(404);
+                    });
+            });
+        })
 
-        it('teststatus code and body response when id is Valid', function (done) {
-            fetchServer(`${serverUrl}/cart/12`).then(({ response, body }) => {
-                expect(response.statusCode).to.equal(200);
-                expect(body).to.equal('Payment methods for cart 12');
-                done();
-            }).catch((error) => {
-                done(error)
-                assert.throws(error);
-            })
-        });
-        it('test status code and body response when id is not Valid', function (done) {
-            fetchServer(`${serverUrl}/cart/str`).then(({ response, body }) => {
-                expect(response.statusCode).to.be.above(400)
-                done();
-            }).catch((error) => {
-                done(error)
-                assert.throws(error);
-            })
-        });
+
     });
 });
 
