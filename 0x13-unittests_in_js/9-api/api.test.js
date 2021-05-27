@@ -53,6 +53,18 @@ describe('Basic Integration testing', function () {
                         expect(e.statusCode).to.equal(404);
                     });
             });
+            it('GET /cart/:id with invalid path', function () {
+                return fetchServer('http://localhost:7865/cart/')
+                    .catch(e => {
+                        expect(e.statusCode).to.equal(404);
+                    });
+            });
+            it('GET /cart/:id with invalid path', function () {
+                return fetchServer('http://localhost:7865/cart/hello')
+                    .catch(e => {
+                        expect(e.statusCode).to.equal(404);
+                    });
+            });
         })
 
 
