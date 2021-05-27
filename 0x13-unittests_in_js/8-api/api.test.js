@@ -1,5 +1,6 @@
 const request = require('request');
 const { assert } = require('chai');
+const { expect } = require('chai');
 
 const serverUrl = 'http://localhost:7865'
 
@@ -22,20 +23,21 @@ describe('Basic Integration testing', function () {
 
         it('test the response status', function (done) {
             fetchServer(serverUrl).then(({ response, body }) => {
-                assert.strictEqual(response.statusCode, '200');
+                expect(response.statusCode).to.equal(200);
                 done();
             }).catch((error) => done(error))
         });
         it('test the response body', function (done) {
             fetchServer(serverUrl).then(({ response, body }) => {
-                assert.strictEqual(body, 'Welcome to the payment system');
+                expect(body).to.equal('Welcome to the payment system');
                 done();
             }).catch((error) => done(error))
         });
         it('test error after failed request', function (done) {
             fetchServer('http://localhost:7866').then(({ e }) => {
                 done();
-            }).catch((error) => { done(error)
+            }).catch((error) => {
+                done(error)
                 assert.throws(error);
             })
         });
