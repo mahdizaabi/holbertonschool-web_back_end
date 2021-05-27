@@ -1,4 +1,4 @@
-const { getPaymentTokenFromAPI } = require('./6-payment_token');
+const getPaymentTokenFromAPI = require('./6-payment_token');
 const { assert } = require('chai');
 
 describe('getPaymentTokenFromAPI', function () {
