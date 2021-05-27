@@ -20,15 +20,9 @@ function fetchServer(serverUrl) {
 
 describe('Basic Integration testing', function () {
     describe('test server response after GET request', function () {
-
-        it('test the response status', function (done) {
+        it('test the response', function (done) {
             fetchServer(serverUrl).then(({ response, body }) => {
                 expect(response.statusCode).to.equal(200);
-                done();
-            }).catch((error) => done(error))
-        });
-        it('test the response body', function (done) {
-            fetchServer(serverUrl).then(({ response, body }) => {
                 expect(body).to.equal('Welcome to the payment system');
                 done();
             }).catch((error) => done(error))
