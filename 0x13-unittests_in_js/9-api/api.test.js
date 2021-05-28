@@ -47,18 +47,27 @@ describe('Basic Integration testing', function () {
                         expect(res.body).to.equal('Payment methods for cart 14');
                     });
             });
+
+
+        })
+        describe('GET /cart/m', () => {
             it('GET /cart/:id with invalid id', function () {
                 return fetchServer('http://localhost:7865/cart/m')
                     .catch(e => {
                         expect(e.statusCode).to.equal(404);
                     });
             });
+        })
+        describe('GET /cart/', () => {
             it('GET /cart/:id with invalid path', function () {
                 return fetchServer('http://localhost:7865/cart/')
                     .catch(e => {
                         expect(e.statusCode).to.equal(404);
                     });
             });
+        })
+
+        describe('GET /cart/hello', () => {
             it('GET /cart/:id with invalid path', function () {
                 return fetchServer('http://localhost:7865/cart/hello')
                     .catch(e => {
@@ -66,8 +75,19 @@ describe('Basic Integration testing', function () {
                     });
             });
         })
+        describe('GET /cart/12b', () => {
+            it('Responds with 404', (done) => {
+                const options = {
+                    url: 'http://localhost:7865/cart/12b',
+                    method: 'GET',
+                };
 
-
+                request(options, function (error, response, body) {
+                    expect(response.statusCode).to.equal(404);
+                    done();
+                });
+            });
+        });
     });
 });
 
