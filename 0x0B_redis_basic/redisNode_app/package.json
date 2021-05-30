@@ -1,0 +1,21 @@
+{
+  "name": "taskmanger",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "runsv": "./node_modules/.bin/nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "*",
+    "ejs": "^2.4.2",
+    "express": "*",
+    "morgan": "*",
+    "nodemon": "^2.0.7",
+    "redis": "*"
+  }
+}

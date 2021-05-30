@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./static/style/1.css" type="text/css">>
+    <title>Document</title>
+</head>
+<body>
+    <h1> task manager </h1>
+    <form method="POST" action="/addNewTask">
+        <input type="text" name="task" id="task">
+        <button type="submit"> add task </button>
+    </form>
+    <form method="post" action="/task/delete">
+        <ul class="task-list">
+        <% tasks.forEach(function(task){ %>
+            <li>
+                <label>
+                    <input type="checkbox" name="tasksToRemove" class="del" value="<%= task %>"><span><%= task %></span>
+                </label>
+            </li>
+        <% }) %>
+        </ul>
+        <input type="submit" value="Remove">
+    </form>
+
+</body>
+</html>

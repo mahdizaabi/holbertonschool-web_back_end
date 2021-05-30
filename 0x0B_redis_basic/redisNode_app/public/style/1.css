@@ -1,0 +1,12 @@
+* {
+    background-color: rgb(180, 13, 13);
+}
+
+body {
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
