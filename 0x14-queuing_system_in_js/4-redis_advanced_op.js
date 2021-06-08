@@ -1,11 +1,13 @@
-const { promisify } = require('util');
 import redis from 'redis';
+
+const { promisify } = require('util');
+
 const client = redis.createClient();
-client.on("connect", function (error) {
-    console.error('Redis client connected to the server');
+client.on('connect', (error) => {
+  console.error('Redis client connected to the server');
 });
-client.on("error", function (error) {
-    console.error(`Redis client not connected to the server: ${error}`);
+client.on('error', (error) => {
+  console.error(`Redis client not connected to the server: ${error}`);
 });
 
 client.hset('HolbertonSchools', 'Portland', 50, redis.print);
